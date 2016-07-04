@@ -16,7 +16,57 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NlH-mp-soB">
+                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="Xij-9e-HKA"/>
+                                </constraints>
+                                <items>
+                                    <tabBarItem title="尋找浪浪" image="search_@1x-1" id="yL6-Fg-hZ1"/>
+                                    <tabBarItem title="看看浪浪" image="dog_item@1x-1" id="0RX-4m-ysy">
+                                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                    </tabBarItem>
+                                    <tabBarItem title="最愛浪浪" image="star@1x-1" id="Tjx-AK-Ssa"/>
+                                    <tabBarItem title="幫幫浪浪" image="car@1x" id="sWq-2A-F0a"/>
+                                </items>
+                            </tabBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEB-A5-syU">
+                                <rect key="frame" x="0.0" y="64" width="600" height="1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Itg-8f-i8O"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yN1-D3-dmJ">
+                                <rect key="frame" x="0.0" y="550" width="600" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="ynA-G4-2Cc"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CkP-aH-VFZ">
+                                <rect key="frame" x="0.0" y="65" width="600" height="485"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rEB-A5-syU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="3UU-0J-5V4"/>
+                            <constraint firstItem="NlH-mp-soB" firstAttribute="top" secondItem="yN1-D3-dmJ" secondAttribute="bottom" id="3r6-qa-L3s"/>
+                            <constraint firstItem="rEB-A5-syU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3tR-S3-n1v"/>
+                            <constraint firstAttribute="trailing" secondItem="yN1-D3-dmJ" secondAttribute="trailing" id="EIh-NF-EPm"/>
+                            <constraint firstItem="NlH-mp-soB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Hln-3d-eYw"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NlH-mp-soB" secondAttribute="bottom" id="Mqe-KG-hLK"/>
+                            <constraint firstItem="yN1-D3-dmJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Qn4-LO-ovh"/>
+                            <constraint firstItem="CkP-aH-VFZ" firstAttribute="top" secondItem="rEB-A5-syU" secondAttribute="bottom" id="Ya8-D1-jFs"/>
+                            <constraint firstItem="CkP-aH-VFZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kPB-rQ-Ieb"/>
+                            <constraint firstItem="yN1-D3-dmJ" firstAttribute="top" secondItem="CkP-aH-VFZ" secondAttribute="bottom" id="lKT-J8-6t4"/>
+                            <constraint firstAttribute="trailing" secondItem="NlH-mp-soB" secondAttribute="trailing" id="qa7-KU-qhy"/>
+                            <constraint firstAttribute="trailing" secondItem="CkP-aH-VFZ" secondAttribute="trailing" id="s6d-Vg-Hzt"/>
+                            <constraint firstAttribute="trailing" secondItem="rEB-A5-syU" secondAttribute="trailing" id="v75-WY-7oU"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0cN-R2-9NU"/>
                 </viewController>
@@ -43,4 +93,10 @@
             <point key="canvasLocation" x="320" y="828"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="car@1x" width="32" height="32"/>
+        <image name="dog_item@1x-1" width="32" height="32"/>
+        <image name="search_@1x-1" width="32" height="32"/>
+        <image name="star@1x-1" width="32" height="32"/>
+    </resources>
 </document>

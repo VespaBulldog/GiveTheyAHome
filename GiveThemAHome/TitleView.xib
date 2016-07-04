@@ -24,8 +24,8 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x2M-ft-MGB">
-                            <rect key="frame" x="218" y="4" width="32" height="32"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dog_icon@1x" translatesAutoresizingMaskIntoConstraints="NO" id="x2M-ft-MGB">
+                            <rect key="frame" x="224" y="4" width="32" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="32" id="OKH-nl-DUt"/>
                                 <constraint firstAttribute="height" constant="32" id="OOC-sA-kKY"/>
@@ -34,7 +34,7 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="x2M-ft-MGB" firstAttribute="centerY" secondItem="yyb-IM-XLh" secondAttribute="centerY" id="52C-DJ-Aho"/>
-                        <constraint firstItem="x2M-ft-MGB" firstAttribute="leading" secondItem="yyb-IM-XLh" secondAttribute="leading" constant="-32" id="57s-yU-cIM"/>
+                        <constraint firstItem="x2M-ft-MGB" firstAttribute="leading" secondItem="yyb-IM-XLh" secondAttribute="leading" constant="-26" id="57s-yU-cIM"/>
                         <constraint firstAttribute="height" constant="40" id="CtG-Qq-b13"/>
                         <constraint firstItem="yyb-IM-XLh" firstAttribute="top" secondItem="ZlA-B3-EZH" secondAttribute="top" id="Y80-Wc-rXN"/>
                         <constraint firstItem="yyb-IM-XLh" firstAttribute="centerX" secondItem="ZlA-B3-EZH" secondAttribute="centerX" id="ZMf-LR-bGJ"/>
@@ -56,4 +56,7 @@
             <point key="canvasLocation" x="241" y="18"/>
         </view>
     </objects>
+    <resources>
+        <image name="dog_icon@1x" width="32" height="32"/>
+    </resources>
 </document>
