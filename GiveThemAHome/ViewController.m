@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "TitleView.h"
 
 @interface ViewController ()
 
@@ -16,12 +17,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self initProperty];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)initProperty
+{
+    [self initTitleView];
+}
+
+-(void)initTitleView
+{
+    
+    TitleView *titleView = [[[NSBundle mainBundle] loadNibNamed:@"TitleView"
+                                                          owner:self
+                                                        options:nil] objectAtIndex:0];
+    titleView.frame = CGRectMake(0,0,200,44);
+    self.navigationItem.titleView = titleView;
+    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:255.0/255.0f green:52.0/255.0f blue:93.0/255.0f alpha:1]];
 }
 
 @end
