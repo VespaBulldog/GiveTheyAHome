@@ -17,6 +17,8 @@
 		206D324D1D2A622F00055ED5 /* GiveThemAHomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D324C1D2A622F00055ED5 /* GiveThemAHomeUITests.m */; };
 		206D32621D2A637200055ED5 /* TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D32601D2A637200055ED5 /* TitleView.m */; };
 		206D32631D2A637200055ED5 /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206D32611D2A637200055ED5 /* TitleView.xib */; };
+		206D32931D2BCA0400055ED5 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D32911D2BCA0400055ED5 /* ListCell.m */; };
+		206D32941D2BCA0500055ED5 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206D32921D2BCA0400055ED5 /* ListCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,9 @@
 		206D325F1D2A637200055ED5 /* TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleView.h; sourceTree = "<group>"; };
 		206D32601D2A637200055ED5 /* TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleView.m; sourceTree = "<group>"; };
 		206D32611D2A637200055ED5 /* TitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleView.xib; sourceTree = "<group>"; };
+		206D32901D2BCA0400055ED5 /* ListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCell.h; sourceTree = "<group>"; };
+		206D32911D2BCA0400055ED5 /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCell.m; sourceTree = "<group>"; };
+		206D32921D2BCA0400055ED5 /* ListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +154,7 @@
 		206D325A1D2A629A00055ED5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				206D328F1D2BC7D500055ED5 /* Cell */,
 				206D325B1D2A62AC00055ED5 /* TitleView */,
 			);
 			name = View;
@@ -162,6 +168,16 @@
 				206D32611D2A637200055ED5 /* TitleView.xib */,
 			);
 			name = TitleView;
+			sourceTree = "<group>";
+		};
+		206D328F1D2BC7D500055ED5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				206D32901D2BCA0400055ED5 /* ListCell.h */,
+				206D32911D2BCA0400055ED5 /* ListCell.m */,
+				206D32921D2BCA0400055ED5 /* ListCell.xib */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +287,7 @@
 				206D32341D2A622F00055ED5 /* Assets.xcassets in Resources */,
 				206D32321D2A622F00055ED5 /* Main.storyboard in Resources */,
 				206D32631D2A637200055ED5 /* TitleView.xib in Resources */,
+				206D32941D2BCA0500055ED5 /* ListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +315,7 @@
 				206D322F1D2A622F00055ED5 /* ViewController.m in Sources */,
 				206D322C1D2A622F00055ED5 /* AppDelegate.m in Sources */,
 				206D32291D2A622F00055ED5 /* main.m in Sources */,
+				206D32931D2BCA0400055ED5 /* ListCell.m in Sources */,
 				206D32621D2A637200055ED5 /* TitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,6 +544,7 @@
 				206D32531D2A622F00055ED5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		206D32541D2A622F00055ED5 /* Build configuration list for PBXNativeTarget "GiveThemAHomeTests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +553,7 @@
 				206D32561D2A622F00055ED5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		206D32571D2A622F00055ED5 /* Build configuration list for PBXNativeTarget "GiveThemAHomeUITests" */ = {
 			isa = XCConfigurationList;
@@ -542,6 +562,7 @@
 				206D32591D2A622F00055ED5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
