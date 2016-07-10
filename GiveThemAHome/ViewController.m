@@ -41,7 +41,8 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [_cache.allDownloadOperationCache removeAllObjects];
+    [_cache.allImageCache removeAllObjects];
 }
 
 -(void)viewDidLayoutSubviews
