@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="239" id="KGk-i7-Jjw" customClass="ListCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListCell" rowHeight="239" id="KGk-i7-Jjw" customClass="ListCell">
             <rect key="frame" x="0.0" y="0.0" width="462" height="239"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -122,32 +122,41 @@
                         </variation>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="男生，幼犬" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLb-Rk-5wK">
-                        <rect key="frame" x="10" y="121" width="163" height="18"/>
+                        <rect key="frame" x="10" y="121" width="152" height="18"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="attachment" translatesAutoresizingMaskIntoConstraints="NO" id="fV3-nS-Y5D">
-                        <rect key="frame" x="181" y="121" width="19" height="19"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cat" translatesAutoresizingMaskIntoConstraints="NO" id="fV3-nS-Y5D">
+                        <rect key="frame" x="170" y="117" width="26" height="26"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="19" id="wFc-YN-JKr"/>
-                            <constraint firstAttribute="width" constant="19" id="ydy-6m-TC2"/>
+                            <constraint firstAttribute="height" constant="26" id="wFc-YN-JKr"/>
+                            <constraint firstAttribute="width" constant="26" id="ydy-6m-TC2"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="like-1" translatesAutoresizingMaskIntoConstraints="NO" id="0ap-Jo-LtC">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likeed" translatesAutoresizingMaskIntoConstraints="NO" id="0ap-Jo-LtC">
                         <rect key="frame" x="425" y="16" width="21" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="21" id="Dss-1m-42j"/>
                             <constraint firstAttribute="height" constant="21" id="nTa-Xn-jFd"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N17-HZ-E2K">
+                        <rect key="frame" x="0.0" y="0.0" width="462" height="238"/>
+                    </button>
+                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8p-e3-B0f">
+                        <rect key="frame" x="420" y="11" width="31" height="31"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dLb-Rk-5wK" firstAttribute="leading" secondItem="ybs-iM-lAG" secondAttribute="leading" constant="10" id="26I-C7-U2e"/>
                     <constraint firstItem="u2v-xV-pEx" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.7" id="2H6-IA-BWE"/>
+                    <constraint firstItem="w8p-e3-B0f" firstAttribute="height" secondItem="0ap-Jo-LtC" secondAttribute="height" multiplier="1.5" id="2oK-7a-lZk"/>
                     <constraint firstItem="ybs-iM-lAG" firstAttribute="height" secondItem="u2v-xV-pEx" secondAttribute="height" multiplier="1/5" id="4gs-KB-HUr"/>
                     <constraint firstItem="ybs-iM-lAG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5fL-Jc-9sY"/>
+                    <constraint firstAttribute="trailing" secondItem="N17-HZ-E2K" secondAttribute="trailing" id="8d0-Nc-wDS"/>
                     <constraint firstAttribute="bottom" secondItem="f1S-Ay-KpA" secondAttribute="bottom" id="9AK-cI-p0E"/>
+                    <constraint firstItem="w8p-e3-B0f" firstAttribute="centerY" secondItem="0ap-Jo-LtC" secondAttribute="centerY" id="Ajg-QK-i9f"/>
                     <constraint firstItem="63k-eq-oaP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ci7-tO-rEk"/>
                     <constraint firstItem="f1S-Ay-KpA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="DMM-Y7-Rv1"/>
                     <constraint firstItem="63k-eq-oaP" firstAttribute="top" secondItem="u2v-xV-pEx" secondAttribute="bottom" id="EIT-dF-ZD0"/>
@@ -157,15 +166,20 @@
                     <constraint firstItem="dLb-Rk-5wK" firstAttribute="centerY" secondItem="ybs-iM-lAG" secondAttribute="centerY" id="Pa5-Ay-ypk"/>
                     <constraint firstItem="ybs-iM-lAG" firstAttribute="width" secondItem="u2v-xV-pEx" secondAttribute="width" multiplier="0.45" id="Q0E-qh-COI"/>
                     <constraint firstItem="f1S-Ay-KpA" firstAttribute="top" secondItem="63k-eq-oaP" secondAttribute="bottom" id="Q4M-Je-zmJ"/>
+                    <constraint firstItem="N17-HZ-E2K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ROP-pA-BZT"/>
                     <constraint firstItem="u2v-xV-pEx" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.7" id="SDu-0d-bHL"/>
-                    <constraint firstItem="fV3-nS-Y5D" firstAttribute="trailing" secondItem="ybs-iM-lAG" secondAttribute="trailing" constant="-8" id="Ufd-px-ksV"/>
+                    <constraint firstItem="fV3-nS-Y5D" firstAttribute="trailing" secondItem="ybs-iM-lAG" secondAttribute="trailing" constant="-12" id="Ufd-px-ksV"/>
                     <constraint firstItem="fV3-nS-Y5D" firstAttribute="leading" secondItem="dLb-Rk-5wK" secondAttribute="trailing" constant="8" id="Y8i-Ld-dtm"/>
                     <constraint firstItem="ybs-iM-lAG" firstAttribute="bottom" secondItem="u2v-xV-pEx" secondAttribute="bottom" constant="-20" id="bbj-jG-S3S"/>
                     <constraint firstAttribute="trailingMargin" secondItem="0ap-Jo-LtC" secondAttribute="trailing" constant="8" id="f6O-cD-0Be"/>
                     <constraint firstAttribute="trailing" secondItem="63k-eq-oaP" secondAttribute="trailing" id="kd7-Pt-Nj8"/>
+                    <constraint firstItem="w8p-e3-B0f" firstAttribute="width" secondItem="0ap-Jo-LtC" secondAttribute="width" multiplier="1.5" id="nyf-B3-efg"/>
                     <constraint firstItem="u2v-xV-pEx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ob3-bf-LyR"/>
+                    <constraint firstItem="N17-HZ-E2K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="q97-7g-unJ"/>
                     <constraint firstItem="0ap-Jo-LtC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="qfR-9h-Vwc"/>
                     <constraint firstItem="fV3-nS-Y5D" firstAttribute="centerY" secondItem="ybs-iM-lAG" secondAttribute="centerY" id="u9u-9z-akz"/>
+                    <constraint firstItem="w8p-e3-B0f" firstAttribute="centerX" secondItem="0ap-Jo-LtC" secondAttribute="centerX" id="vSI-Lu-6gj"/>
+                    <constraint firstAttribute="bottom" secondItem="N17-HZ-E2K" secondAttribute="bottom" id="wKk-zz-E2x"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -174,16 +188,24 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="IDLab" destination="UwY-fX-mRF" id="PzA-qT-igb"/>
+                <outlet property="btn_Like" destination="w8p-e3-B0f" id="yUJ-bg-Q0c"/>
+                <outlet property="btn_Push" destination="N17-HZ-E2K" id="rIc-PS-qXa"/>
+                <outlet property="discriptionLab" destination="dcb-QV-gtE" id="uBi-Jw-wgh"/>
                 <outlet property="image" destination="u2v-xV-pEx" id="EOI-EB-LPU"/>
+                <outlet property="kindImage" destination="fV3-nS-Y5D" id="qFZ-Uv-UdS"/>
+                <outlet property="locationLab" destination="2ki-Ze-mXZ" id="6pv-La-JWr"/>
+                <outlet property="openDateLab" destination="WOY-gT-Wkb" id="wdx-9Q-Fcq"/>
+                <outlet property="sexAndAgeLab" destination="dLb-Rk-5wK" id="JlW-8V-bn7"/>
             </connections>
             <point key="canvasLocation" x="462" y="446.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="attachment" width="512" height="512"/>
         <image name="calendar-5" width="512" height="512"/>
+        <image name="cat" width="16" height="16"/>
         <image name="id-card" width="512" height="512"/>
-        <image name="like-1" width="512" height="512"/>
+        <image name="likeed" width="132" height="124"/>
         <image name="placeholder-3" width="512" height="512"/>
     </resources>
 </document>

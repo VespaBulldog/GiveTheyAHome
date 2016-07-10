@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Evan. All rights reserved.
 //
 
-#import "Cell.h"
+#import "ListCell.h"
 
 @implementation ListCell
 

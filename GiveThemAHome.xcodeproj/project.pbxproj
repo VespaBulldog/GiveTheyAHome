@@ -19,6 +19,14 @@
 		206D32631D2A637200055ED5 /* TitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206D32611D2A637200055ED5 /* TitleView.xib */; };
 		206D32931D2BCA0400055ED5 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D32911D2BCA0400055ED5 /* ListCell.m */; };
 		206D32941D2BCA0500055ED5 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206D32921D2BCA0400055ED5 /* ListCell.xib */; };
+		2C065DE91D32057A00A76D3A /* DetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C065DE81D32057A00A76D3A /* DetailVC.m */; };
+		2C065E2E1D32492500A76D3A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C065E2D1D32492500A76D3A /* MapKit.framework */; };
+		2C065E301D324A1200A76D3A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C065E2F1D324A1200A76D3A /* CoreLocation.framework */; };
+		2C065E321D324A1B00A76D3A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C065E311D324A1B00A76D3A /* CoreGraphics.framework */; };
+		2C065E371D32626C00A76D3A /* TransData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C065E361D32626C00A76D3A /* TransData.m */; };
+		2C6FA45F1D2F9D3400EB40A3 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FA45E1D2F9D3400EB40A3 /* DataModel.m */; };
+		2C6FA4621D2FA68200EB40A3 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FA4611D2FA68200EB40A3 /* ImageCache.m */; };
+		2C6FA4671D310BCC00EB40A3 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6FA4661D310BCC00EB40A3 /* SearchViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +69,20 @@
 		206D32901D2BCA0400055ED5 /* ListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCell.h; sourceTree = "<group>"; };
 		206D32911D2BCA0400055ED5 /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCell.m; sourceTree = "<group>"; };
 		206D32921D2BCA0400055ED5 /* ListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
+		2C065DE71D32057A00A76D3A /* DetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailVC.h; path = ViewController/DetailVC.h; sourceTree = "<group>"; };
+		2C065DE81D32057A00A76D3A /* DetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailVC.m; path = ViewController/DetailVC.m; sourceTree = "<group>"; };
+		2C065E2D1D32492500A76D3A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		2C065E2F1D324A1200A76D3A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2C065E311D324A1B00A76D3A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2C065E331D324A2500A76D3A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2C065E351D32626C00A76D3A /* TransData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransData.h; path = Model/TransData.h; sourceTree = "<group>"; };
+		2C065E361D32626C00A76D3A /* TransData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransData.m; path = Model/TransData.m; sourceTree = "<group>"; };
+		2C6FA45D1D2F9D3400EB40A3 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataModel.h; path = Model/DataModel.h; sourceTree = "<group>"; };
+		2C6FA45E1D2F9D3400EB40A3 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataModel.m; path = Model/DataModel.m; sourceTree = "<group>"; };
+		2C6FA4601D2FA68200EB40A3 /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageCache.h; path = Cache/ImageCache.h; sourceTree = "<group>"; };
+		2C6FA4611D2FA68200EB40A3 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageCache.m; path = Cache/ImageCache.m; sourceTree = "<group>"; };
+		2C6FA4651D310BCC00EB40A3 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = ViewController/SearchViewController.h; sourceTree = "<group>"; };
+		2C6FA4661D310BCC00EB40A3 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = ViewController/SearchViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +90,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C065E321D324A1B00A76D3A /* CoreGraphics.framework in Frameworks */,
+				2C065E301D324A1200A76D3A /* CoreLocation.framework in Frameworks */,
+				2C065E2E1D32492500A76D3A /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +116,10 @@
 		206D321B1D2A622F00055ED5 = {
 			isa = PBXGroup;
 			children = (
+				2C065E331D324A2500A76D3A /* UIKit.framework */,
+				2C065E311D324A1B00A76D3A /* CoreGraphics.framework */,
+				2C065E2F1D324A1200A76D3A /* CoreLocation.framework */,
+				2C065E2D1D32492500A76D3A /* MapKit.framework */,
 				206D32261D2A622F00055ED5 /* GiveThemAHome */,
 				206D32401D2A622F00055ED5 /* GiveThemAHomeTests */,
 				206D324B1D2A622F00055ED5 /* GiveThemAHomeUITests */,
@@ -113,10 +142,10 @@
 			children = (
 				206D322A1D2A622F00055ED5 /* AppDelegate.h */,
 				206D322B1D2A622F00055ED5 /* AppDelegate.m */,
-				206D322D1D2A622F00055ED5 /* ViewController.h */,
-				206D322E1D2A622F00055ED5 /* ViewController.m */,
+				2C6FA45C1D2F9D0F00EB40A3 /* Model */,
+				2C6FA4631D2FA68D00EB40A3 /* Cache */,
+				2C6FA4641D310B8200EB40A3 /* ViewController */,
 				206D325A1D2A629A00055ED5 /* View */,
-				206D32301D2A622F00055ED5 /* Main.storyboard */,
 				206D32331D2A622F00055ED5 /* Assets.xcassets */,
 				206D32351D2A622F00055ED5 /* LaunchScreen.storyboard */,
 				206D32381D2A622F00055ED5 /* Info.plist */,
@@ -178,6 +207,40 @@
 				206D32921D2BCA0400055ED5 /* ListCell.xib */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		2C6FA45C1D2F9D0F00EB40A3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C6FA45D1D2F9D3400EB40A3 /* DataModel.h */,
+				2C6FA45E1D2F9D3400EB40A3 /* DataModel.m */,
+				2C065E351D32626C00A76D3A /* TransData.h */,
+				2C065E361D32626C00A76D3A /* TransData.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		2C6FA4631D2FA68D00EB40A3 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				2C6FA4601D2FA68200EB40A3 /* ImageCache.h */,
+				2C6FA4611D2FA68200EB40A3 /* ImageCache.m */,
+			);
+			name = Cache;
+			sourceTree = "<group>";
+		};
+		2C6FA4641D310B8200EB40A3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				206D322D1D2A622F00055ED5 /* ViewController.h */,
+				206D322E1D2A622F00055ED5 /* ViewController.m */,
+				206D32301D2A622F00055ED5 /* Main.storyboard */,
+				2C6FA4651D310BCC00EB40A3 /* SearchViewController.h */,
+				2C6FA4661D310BCC00EB40A3 /* SearchViewController.m */,
+				2C065DE71D32057A00A76D3A /* DetailVC.h */,
+				2C065DE81D32057A00A76D3A /* DetailVC.m */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +310,7 @@
 				TargetAttributes = {
 					206D32231D2A622F00055ED5 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = MS9SPSH35M;
 					};
 					206D323C1D2A622F00055ED5 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -312,11 +376,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C065DE91D32057A00A76D3A /* DetailVC.m in Sources */,
 				206D322F1D2A622F00055ED5 /* ViewController.m in Sources */,
 				206D322C1D2A622F00055ED5 /* AppDelegate.m in Sources */,
 				206D32291D2A622F00055ED5 /* main.m in Sources */,
+				2C6FA45F1D2F9D3400EB40A3 /* DataModel.m in Sources */,
 				206D32931D2BCA0400055ED5 /* ListCell.m in Sources */,
+				2C065E371D32626C00A76D3A /* TransData.m in Sources */,
 				206D32621D2A637200055ED5 /* TitleView.m in Sources */,
+				2C6FA4671D310BCC00EB40A3 /* SearchViewController.m in Sources */,
+				2C6FA4621D2FA68200EB40A3 /* ImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,11 +528,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GiveThemAHome/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Evan.GiveThemAHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -471,11 +544,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GiveThemAHome/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Evan.GiveThemAHome;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
