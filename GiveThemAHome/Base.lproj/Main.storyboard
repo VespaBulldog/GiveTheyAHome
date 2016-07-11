@@ -42,7 +42,6 @@
         <!--DetailVC-->
         <scene sceneID="ExP-Sz-6Lm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zfe-dl-glf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="DetailVC" id="zBw-ee-Fm0" customClass="DetailVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qd1-Y9-Ieu"/>
@@ -439,6 +438,7 @@
                         <outlet property="str_Shelter_Name" destination="Aig-s1-mc8" id="vAJ-az-yIO"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zfe-dl-glf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2874" y="574"/>
         </scene>

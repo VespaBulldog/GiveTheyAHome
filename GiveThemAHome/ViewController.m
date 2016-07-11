@@ -43,6 +43,7 @@
     [super didReceiveMemoryWarning];
     [_cache.allDownloadOperationCache removeAllObjects];
     [_cache.allImageCache removeAllObjects];
+    [self getResultData];
 }
 
 -(void)viewDidLayoutSubviews

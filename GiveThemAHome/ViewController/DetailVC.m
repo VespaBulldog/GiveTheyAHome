@@ -112,19 +112,28 @@
     //建立MKPointAnnotation物件
     //設定title，以設定選取後顯示的字樣
     //設定coordinate，指出所在的經緯度
-    //在此建立台北的位置
+    //在此建立 shelter_address 的位置
     MKPointAnnotation * point1;
     point1 = [[MKPointAnnotation alloc] init];
-    NSString *oreillyAddress =@"臺南市善化區東昌里東勢寮1之19號";
+    NSString *oreillyAddress =_model.shelter_address;
     CLGeocoder *myGeocoder = [[CLGeocoder alloc] init];
     [myGeocoder geocodeAddressString:oreillyAddress completionHandler:^(NSArray*placemarks, NSError *error) {
         
         if ([placemarks count] > 0 && error == nil){
             NSLog(@"Found %lu placemark(s).", (unsigned long)[placemarks count]);
             CLPlacemark *firstPlacemark = [placemarks objectAtIndex:0];
-            NSLog(@"Longitude = %f", firstPlacemark.location.coordinate.longitude);
-            NSLog(@"Latitude = %f", firstPlacemark.location.coordinate.latitude);
             point1.coordinate = CLLocationCoordinate2DMake(firstPlacemark.location.coordinate.latitude, firstPlacemark.location.coordinate.longitude);
+            //CLLocationCoordinate2D 的 struct “myLocation"，然後設定他的緯度 (latitude) 以及經度 (longitude) 作為地圖中心的經緯座標
+            CLLocationCoordinate2D myLocation;
+            myLocation.latitude = firstPlacemark.location.coordinate.latitude;
+            myLocation.longitude = firstPlacemark.location.coordinate.longitude;
+            //地圖可涵蓋的範圍有多大，這包括其中心點位置以及所展開的範圍
+            MKCoordinateRegion myRegion;
+            myRegion.center = myLocation;
+            myRegion.span.latitudeDelta = 0.015;
+            myRegion.span.longitudeDelta = 0.015;
+            [_mapView setRegion:myRegion];
+            
         }
         else if ([placemarks count] == 0 &&
                  error == nil){
@@ -135,20 +144,14 @@
         }
     }];
     
-    point1.title = @"臺南市善化區東昌里東勢寮1之19號";
+    point1.title = _model.shelter_address;
     
     //透過addAnnotation訊息，
     //實際將大頭針釘在地圖上，
     //以標出位置
     self.mapView.showsUserLocation = YES;
     [self.mapView addAnnotation:point1];
-//    MKCoordinateRegion theRegion = self.mapView.region;
-//    
-//    // 放大
-//    theRegion.span.longitudeDelta *= 2.0;
-//    theRegion.span.latitudeDelta *= 2.0;
-//    [self.mapView setRegion:theRegion animated:YES];
-//    self.mapView.userTrackingMode = MKUserTrackingModeFollowWithHeading;
+
     
 }
 
