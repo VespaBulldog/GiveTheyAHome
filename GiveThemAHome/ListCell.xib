@@ -38,14 +38,14 @@
                                 <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="id-card" translatesAutoresizingMaskIntoConstraints="NO" id="X1M-gg-pTo">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="id" translatesAutoresizingMaskIntoConstraints="NO" id="X1M-gg-pTo">
                                 <rect key="frame" x="8" y="28" width="15" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="YmM-1M-kJ7"/>
                                     <constraint firstAttribute="height" constant="15" id="kVY-9H-npF"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-3" translatesAutoresizingMaskIntoConstraints="NO" id="Qvy-LK-fVW">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-3" translatesAutoresizingMaskIntoConstraints="NO" id="Qvy-LK-fVW">
                                 <rect key="frame" x="8" y="47" width="15" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="GWQ-6n-8ez"/>
@@ -134,7 +134,7 @@
                             <constraint firstAttribute="width" constant="26" id="ydy-6m-TC2"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likeed" translatesAutoresizingMaskIntoConstraints="NO" id="0ap-Jo-LtC">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart-2" translatesAutoresizingMaskIntoConstraints="NO" id="0ap-Jo-LtC">
                         <rect key="frame" x="425" y="16" width="21" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="21" id="Dss-1m-42j"/>
@@ -202,10 +202,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="calendar-5" width="512" height="512"/>
+        <image name="calendar-5" width="37" height="37"/>
         <image name="cat" width="16" height="16"/>
-        <image name="id-card" width="512" height="512"/>
-        <image name="likeed" width="132" height="124"/>
-        <image name="placeholder-3" width="512" height="512"/>
+        <image name="heart-2" width="131" height="122"/>
+        <image name="id" width="37" height="37"/>
+        <image name="placeholder-3" width="37" height="53"/>
     </resources>
 </document>

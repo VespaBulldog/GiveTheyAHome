@@ -81,18 +81,9 @@
 
 -(void)initImage
 {
-//    _img = nil;
     if (!_img)
     {
-        defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-        defaultConfigObject.timeoutIntervalForResource = 6;
-        defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: _imageQueue];
-        NSURL * url = [NSURL URLWithString:_model.album_file];
-        
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURLSessionDownloadTask * downloadImageTask = [defaultSession downloadTaskWithURL:url];
-        [downloadImageTask resume];
-             });
+        [self downLoadImage];
         return;
     }
     
@@ -112,6 +103,19 @@
     _imgHeight.constant = frame.size.height;
     _imageView.layer.borderWidth = 8;
     _imageView.layer.borderColor = [[UIColor whiteColor] CGColor];
+}
+
+-(void)downLoadImage
+{
+    defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    defaultConfigObject.timeoutIntervalForResource = 6;
+    defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: _imageQueue];
+    NSURL * url = [NSURL URLWithString:_model.album_file];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURLSessionDownloadTask * downloadImageTask = [defaultSession downloadTaskWithURL:url];
+        [downloadImageTask resume];
+    });
 }
 
 -(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
