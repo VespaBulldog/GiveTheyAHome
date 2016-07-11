@@ -12,8 +12,13 @@
 #import <CoreLocation/CLGeocoder.h> 
 #import "TransData.h"
 #import "TitleView.h"
+#import "ImageCache.h"
 
-@interface DetailVC ()
+@interface DetailVC ()<NSURLSessionDelegate>
+{
+    NSURLSessionConfiguration *defaultConfigObject;
+    NSURLSession *defaultSession;
+}
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgHeight;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -33,6 +38,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *Lab_animal_bacterin;
 @property (weak, nonatomic) IBOutlet UILabel *Lab_animal_opendate;
 @property (weak, nonatomic) IBOutlet UILabel *Lab_animal_remark;
+@property (nonatomic, strong) NSOperationQueue *imageQueue;
+@property (nonatomic, strong) ImageCache *cache;
 
 @end
 
@@ -51,6 +58,10 @@
 
 -(void)initUI
 {
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    UINavigationItem *i = [UINavigationItem new];
+//    i.title = @"xx";
+////    [self.navigationController.navigationBar add]
     [self initTitleView];
     [self initImage];
     [self initMapView];
@@ -70,6 +81,21 @@
 
 -(void)initImage
 {
+//    _img = nil;
+    if (!_img)
+    {
+        defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+        defaultConfigObject.timeoutIntervalForResource = 6;
+        defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: _imageQueue];
+        NSURL * url = [NSURL URLWithString:_model.album_file];
+        
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURLSessionDownloadTask * downloadImageTask = [defaultSession downloadTaskWithURL:url];
+        [downloadImageTask resume];
+             });
+        return;
+    }
+    
     _imageView.image = _img;
     CGSize mainSize = [[UIScreen mainScreen] bounds].size;
     CGRect frame = [self getFrameSizeForImage:_img inImageView:_imageView];
@@ -86,6 +112,23 @@
     _imgHeight.constant = frame.size.height;
     _imageView.layer.borderWidth = 8;
     _imageView.layer.borderColor = [[UIColor whiteColor] CGColor];
+}
+
+-(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
+{
+    NSData *data = [NSData dataWithContentsOfURL:location];
+    NSString *url = downloadTask.originalRequest.URL.absoluteString;
+    
+    UIImage *downLoadImage = [UIImage imageWithData:data];
+    _cache = [ImageCache sharedImageCache];
+    [_cache.allImageCache setObject:downLoadImage forKey:url];
+    [session invalidateAndCancel];
+    //将下载操作从操作缓存池删除(下载操作已经完成)
+    [self.cache.allDownloadOperationCache removeObjectForKey:url];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _img = downLoadImage;
+        [self initImage];
+    });
 }
 
 //計算image的大小 去調整邊界
