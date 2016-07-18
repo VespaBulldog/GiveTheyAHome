@@ -37,6 +37,23 @@
     [self addACView];
     [self getResultData];
     
+    //註冊通知中心 當按下搜尋要重新撈資料
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(searchAction:)
+                                                 name:@"searchAction"
+                                               object:nil];
+}
+
+//重新撈資料
+- (void) searchAction:(NSNotification*) notification
+{
+    NSDictionary* userInfo = notification.userInfo;
+    [self addACView];
+    _tableView.hidden = YES;
+    [self initProperty];
+    [_cache.allDownloadOperationCache removeAllObjects];
+    [_cache.allImageCache removeAllObjects];
+    [self getResultData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,6 +66,11 @@
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 -(void)initProperty
@@ -111,6 +133,7 @@
 
 -(void)addACView
 {
+    _acView.hidden = NO;
     _acView.layer.cornerRadius = 10;
     [_acView startAnimating];
 }
@@ -118,7 +141,18 @@
 #pragma mark 抓取資料
 -(void)getResultData
 {
-    NSString *urlString = [NSString stringWithFormat:@"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i",currentPage];
+    NSString *urlString = [NSString stringWithFormat:
+     @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i&$filter=animal_area_pkid+like+%i"
+     ,currentPage,0];
+//    NSString *urlString = [NSString stringWithFormat:
+//                           @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i&$filter=animal_area_pkid+like+%i+and+animal_kind+like+狗+and+animal_colour+like+虎斑"
+//                           ,currentPage,0];
+
+//    NSString *urlString = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=10&$skip=0&$filter=animal_colour+like+%E8%99%8E%E6%96%91+and+animal_kind+like+%E7%8B%97+and+animal_area_pkid+like+2";
+    
+    
+//    "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=1000&$skip=0&$filter=animal_colour+like+虎斑+and+animal_kind+like+狗+and+animal_area_pkid+like+2"
+//    NSString *urlString = [NSString stringWithFormat:@"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i&$filter=animal_area_pkid+like+%i",currentPage,0];
     //    NSString *urlString = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=1000";
     NSURL * url = [NSURL URLWithString:urlString];
     
@@ -335,6 +369,7 @@
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([cell respondsToSelector:@selector(setSeparatorInset:)])
@@ -356,7 +391,7 @@
     }
 }
 
-
+//進入detail 頁面
 -(IBAction) pushAct:(id)sender
 {
     UIImage *img = [_cache.allImageCache objectForKey:[_arr_ImgURL objectAtIndex:((UIButton *)sender).tag]];

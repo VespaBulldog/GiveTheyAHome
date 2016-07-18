@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "ViewController.h"
 #import "TitleView.h"
 #import "TransData.h"
 
@@ -307,6 +308,7 @@
 
 - (IBAction)searchAct:(id)sender
 {
+    //把搜尋條件存在 NSUserDefaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[dic_Search objectForKey:@"search_Area"] forKey:@"search_Area"];
     [defaults setObject:[dic_Search objectForKey:@"search_KindType"] forKey:@"search_KindType"];
@@ -315,6 +317,14 @@
     [defaults setObject:[dic_Search objectForKey:@"search_Color"] forKey:@"search_Color"];
     [defaults setObject:[dic_Search objectForKey:@"search_Sex"] forKey:@"search_Sex"];
     [defaults synchronize];
+    
+    //告訴通知中心，可以重撈資料
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter postNotificationName:@"searchAction"
+                                      object:nil
+                                    userInfo:dic_Search];
+    
+    [self.tabBarController setSelectedIndex:0];
 }
 
 @end
