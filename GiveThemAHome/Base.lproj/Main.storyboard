@@ -314,6 +314,9 @@
                                 <state key="normal" title="搜尋">
                                     <color key="titleColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="searchAct:" destination="TaS-3k-Xx6" eventType="touchUpInside" id="Isj-7n-vdy"/>
+                                </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMX-AO-O1Z">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>

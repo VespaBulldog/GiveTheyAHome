@@ -8,11 +8,13 @@
 
 #import "SearchViewController.h"
 #import "TitleView.h"
+#import "TransData.h"
 
 @interface SearchViewController ()<UIPickerViewDelegate>
 {
     int labelNumber;
     NSArray *arr_PickerView;
+    NSMutableDictionary *dic_Search;
 }
 @property (weak, nonatomic) IBOutlet UILabel *lab1;
 @property (weak, nonatomic) IBOutlet UILabel *lab2;
@@ -28,15 +30,23 @@
 
 @implementation SearchViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    [self initView];
-    [self initPickView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self initView];
+    [self initPickView];
+    [self initNSUserDefaults];
+    
 }
 
 -(void)initView
@@ -63,12 +73,45 @@
     self.navigationItem.titleView = titleView;
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:255.0/255.0f green:52.0/255.0f blue:93.0/255.0f alpha:1]];
 }
+
+//初始化 NSUserDefaults
+-(void)initNSUserDefaults
+{
+    dic_Search = [NSMutableDictionary new];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [dic_Search setValue:[defaults objectForKey:@"search_Area"] forKey:@"search_Area"];
+    [dic_Search setValue:[defaults objectForKey:@"search_KindType"] forKey:@"search_KindType"];
+    [dic_Search setValue:[defaults objectForKey:@"search_BodyType"] forKey:@"search_BodyType"];
+    [dic_Search setValue:[defaults objectForKey:@"search_Age"] forKey:@"search_Age"];
+    [dic_Search setValue:[defaults objectForKey:@"search_Color"] forKey:@"search_Color"];
+    [dic_Search setValue:[defaults objectForKey:@"search_Sex"] forKey:@"search_Sex"];
+    [self initLabel];
+}
+
+-(void)initLabel
+{
+    _lab1.text = ((NSString *)[dic_Search objectForKey:@"search_Area"]).length > 0?[dic_Search objectForKey:@"search_Area"]:@"不限";
+    _lab2.text = ((NSString *)[dic_Search objectForKey:@"search_KindType"]).length > 0?[dic_Search objectForKey:@"search_KindType"]:@"不限";
+    _lab3.text = ((NSString *)[dic_Search objectForKey:@"search_BodyType"]).length > 0?[dic_Search objectForKey:@"search_BodyType"]:@"不限";
+    _lab4.text = ((NSString *)[dic_Search objectForKey:@"search_Age"]).length > 0?[dic_Search objectForKey:@"search_Age"]:@"不限";
+    _lab5.text = ((NSString *)[dic_Search objectForKey:@"search_Color"]).length > 0?[dic_Search objectForKey:@"search_Color"]:@"不限";
+    _lab6.text = ((NSString *)[dic_Search objectForKey:@"search_Sex"]).length > 0?[dic_Search objectForKey:@"search_Sex"]:@"不限";
+}
+
 - (IBAction)btn1Act:(id)sender
 {
     labelNumber = 0;
     _pickViewTitle.text = @"縣市區域";
-    arr_PickerView = [[NSArray alloc] initWithObjects:@"不限",@"臺北市",@"新北市",@"基隆市",@"宜蘭縣",@"桃園縣",@"新竹縣",@"新竹市",@"苗栗縣",@"臺中市",@"彰化縣",@"南投縣",@"雲林縣",@"嘉義縣",@"嘉義市",@"臺南市",@"高雄市",@"屏東縣",@"花蓮縣",@"臺東縣",@"澎湖縣",@"金門縣",@"連江縣", nil];
+    arr_PickerView = [TransData getAnimal_Area_Arr];
     [self.pickView reloadAllComponents];
+    
+    NSInteger index = 0;
+    if ([dic_Search objectForKey:@"search_Area"])
+    {
+        index = [arr_PickerView indexOfObject:[dic_Search objectForKey:@"search_Area"]];
+    }
+    [self.pickView selectRow:index inComponent:0 animated:YES];
+    
     [self doAnimation];
     
 }
@@ -78,6 +121,14 @@
     _pickViewTitle.text = @"類型";
     arr_PickerView = [[NSArray alloc] initWithObjects:@"不限",@"狗",@"貓", nil];
     [self.pickView reloadAllComponents];
+    
+    NSInteger index = 0;
+    if ([dic_Search objectForKey:@"search_KindType"])
+    {
+        index = [arr_PickerView indexOfObject:[dic_Search objectForKey:@"search_KindType"]];
+    }
+    [self.pickView selectRow:index inComponent:0 animated:YES];
+    
     [self doAnimation];
 }
 - (IBAction)btn3Act:(id)sender
@@ -86,6 +137,14 @@
     _pickViewTitle.text = @"體型";
     arr_PickerView = [[NSArray alloc] initWithObjects:@"不限",@"迷你",@"小型",@"中型",@"大型", nil];
     [self.pickView reloadAllComponents];
+    
+    NSInteger index = 0;
+    if ([dic_Search objectForKey:@"search_BodyType"])
+    {
+        index = [arr_PickerView indexOfObject:[dic_Search objectForKey:@"search_BodyType"]];
+    }
+    [self.pickView selectRow:index inComponent:0 animated:YES];
+    
     [self doAnimation];
 }
 - (IBAction)btn4Act:(id)sender
@@ -94,22 +153,48 @@
     _pickViewTitle.text = @"年齡";
     arr_PickerView = [[NSArray alloc] initWithObjects:@"不限",@"幼年",@"成年", nil];
     [self.pickView reloadAllComponents];
+    
+    NSInteger index = 0;
+    if ([dic_Search objectForKey:@"search_Age"])
+    {
+        index = [arr_PickerView indexOfObject:[dic_Search objectForKey:@"search_Age"]];
+    }
+    [self.pickView selectRow:index inComponent:0 animated:YES];
+    
     [self doAnimation];
 }
+
 - (IBAction)btn5Act:(id)sender
 {
     labelNumber = 4;
-    _pickViewTitle.text = @"性別";
+    _pickViewTitle.text = @"毛色";
     arr_PickerView = [[NSArray alloc] initWithObjects:@"不限",@"白",@"黒",@"棕",@"黃",@"虎斑", nil];
     [self.pickView reloadAllComponents];
+    
+    NSInteger index = 0;
+    if ([dic_Search objectForKey:@"search_Color"])
+    {
+        index = [arr_PickerView indexOfObject:[dic_Search objectForKey:@"search_Color"]];
+    }
+    [self.pickView selectRow:index inComponent:0 animated:YES];
+    
     [self doAnimation];
 }
+
 - (IBAction)btn6Act:(id)sender
 {
     labelNumber = 5;
-    _pickViewTitle.text = @"縣市區域";
+    _pickViewTitle.text = @"性別";
     arr_PickerView = [[NSArray alloc] initWithObjects:@"不限",@"公",@"母", nil];
     [self.pickView reloadAllComponents];
+    
+    NSInteger index = 0;
+    if ([dic_Search objectForKey:@"search_Sex"])
+    {
+        index = [arr_PickerView indexOfObject:[dic_Search objectForKey:@"search_Sex"]];
+    }
+    [self.pickView selectRow:index inComponent:0 animated:YES];
+    
     [self doAnimation];
 }
 
@@ -144,31 +229,43 @@
         case 0:
         {
             _lab1.text = [arr_PickerView objectAtIndex:row];
+            NSString *search_Area = [arr_PickerView objectAtIndex:row];
+            [dic_Search setValue:search_Area forKey:@"search_Area"];
         }
             break;
         case 1:
         {
             _lab2.text = [arr_PickerView objectAtIndex:row];
+            NSString *search_KindType = [arr_PickerView objectAtIndex:row];
+            [dic_Search setValue:search_KindType forKey:@"search_KindType"];
         }
             break;
         case 2:
         {
             _lab3.text = [arr_PickerView objectAtIndex:row];
+            NSString *search_BodyType = [arr_PickerView objectAtIndex:row];
+            [dic_Search setValue:search_BodyType forKey:@"search_BodyType"];
         }
             break;
         case 3:
         {
             _lab4.text = [arr_PickerView objectAtIndex:row];
+            NSString *search_Age = [arr_PickerView objectAtIndex:row];
+            [dic_Search setValue:search_Age forKey:@"search_Age"];
         }
             break;
         case 4:
         {
             _lab5.text = [arr_PickerView objectAtIndex:row];
+            NSString *search_Color = [arr_PickerView objectAtIndex:row];
+            [dic_Search setValue:search_Color forKey:@"search_Color"];
         }
             break;
         case 5:
         {
             _lab6.text = [arr_PickerView objectAtIndex:row];
+            NSString *search_Sex = [arr_PickerView objectAtIndex:row];
+            [dic_Search setValue:search_Sex forKey:@"search_Sex"];
         }
             break;
         default:
@@ -208,5 +305,16 @@
     return arr_PickerView.count;
 }
 
+- (IBAction)searchAct:(id)sender
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[dic_Search objectForKey:@"search_Area"] forKey:@"search_Area"];
+    [defaults setObject:[dic_Search objectForKey:@"search_KindType"] forKey:@"search_KindType"];
+    [defaults setObject:[dic_Search objectForKey:@"search_BodyType"] forKey:@"search_BodyType"];
+    [defaults setObject:[dic_Search objectForKey:@"search_Age"] forKey:@"search_Age"];
+    [defaults setObject:[dic_Search objectForKey:@"search_Color"] forKey:@"search_Color"];
+    [defaults setObject:[dic_Search objectForKey:@"search_Sex"] forKey:@"search_Sex"];
+    [defaults synchronize];
+}
 
 @end

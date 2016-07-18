@@ -64,16 +64,20 @@
     
 }
 
-+(NSString *)getAnimal_Area:(NSString *)Animal_Area_PkID
++(NSArray *)getAnimal_Area_Arr
 {
-    NSMutableDictionary *dic = [self getAnimal_Area_Dic];
-    NSString *str = [dic objectForKey:Animal_Area_PkID];
-    return str;
+    NSArray * array = [[NSArray alloc] initWithObjects:
+                       @"不限",@"臺北市",@"新北市",@"基隆市",@"宜蘭縣",@"桃園縣",@"新竹縣",@"新竹市",
+                       @"苗栗縣",@"臺中市",@"彰化縣",@"南投縣",@"雲林縣",@"嘉義縣",@"嘉義市",@"臺南市",
+                       @"高雄市",@"屏東縣",@"花蓮縣",@"臺東縣",@"澎湖縣",@"金門縣",@"連江縣", nil];
+    
+    return array;
 }
 
 +(NSMutableDictionary *)getAnimal_Area_Dic
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setObject:@"不限" forKey:@"0"];
     [dic setObject:@"臺北市" forKey:@"2"];
     [dic setObject:@"新北市" forKey:@"3"];
     [dic setObject:@"基隆市" forKey:@"4"];
@@ -82,8 +86,8 @@
     [dic setObject:@"新竹縣" forKey:@"7"];
     [dic setObject:@"新竹市" forKey:@"8"];
     [dic setObject:@"苗栗縣" forKey:@"9"];
-    [dic setObject:@"臺中市" forKey:@"10"];
-    [dic setObject:@"彰化縣" forKey:@"11"];//10
+    [dic setObject:@"臺中市" forKey:@"10"];//10
+    [dic setObject:@"彰化縣" forKey:@"11"];
     [dic setObject:@"南投縣" forKey:@"12"];
     [dic setObject:@"雲林縣" forKey:@"13"];
     [dic setObject:@"嘉義縣" forKey:@"14"];
@@ -92,12 +96,30 @@
     [dic setObject:@"高雄市" forKey:@"17"];
     [dic setObject:@"屏東縣" forKey:@"18"];
     [dic setObject:@"花蓮縣" forKey:@"19"];
-    [dic setObject:@"臺東縣" forKey:@"20"];
-    [dic setObject:@"澎湖縣" forKey:@"21"];//20
+    [dic setObject:@"臺東縣" forKey:@"20"];//20
+    [dic setObject:@"澎湖縣" forKey:@"21"];
     [dic setObject:@"金門縣" forKey:@"22"];
     [dic setObject:@"連江縣" forKey:@"23"];
     
     return dic;
+}
+
+//得到地區的中文名稱
++(NSString *)getAnimal_Area:(NSString *)Animal_Area_PkID
+{
+    NSMutableDictionary *dic = [self getAnimal_Area_Dic];
+    NSString *str = [dic objectForKey:Animal_Area_PkID];
+    return str;
+}
+
+//得到地區的Key
++(NSString *)getAnimal_Area_DicKeyWithArea:(NSString *)area
+{
+    NSMutableDictionary *dic = [self getAnimal_Area_Dic];
+    NSArray *temp = [dic allKeysForObject:area];
+    NSString *key = [temp objectAtIndex:0];
+    
+    return key;
 }
 
 +(NSString *)getAnimal_Sex:(NSString *)animal_Sex
