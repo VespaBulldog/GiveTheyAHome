@@ -212,10 +212,10 @@
     _Lab_animal_foundplace.text = [NSString stringWithFormat:@"動物尋獲地： %@",_model.animal_foundplace.length > 0?_model.animal_foundplace:@"不詳"];
     _Lab_animal_place.text = [NSString stringWithFormat:@"動物實際所在地： %@",_model.animal_place.length > 0?_model.animal_place:@"不詳"];
     _Lab_animal_kind.text = [NSString stringWithFormat:@"動物種類： %@",_model.animal_kind.length > 0?_model.animal_kind:@"不詳"];
-    _Lab_animal_sex.text = [NSString stringWithFormat:@"動物性別： %@",[TransData getAnimal_Sex:_model.animal_sex]];
-    _Lab_animal_bodytype.text = [NSString stringWithFormat:@"動物體型： %@",[TransData getBodytype:_model.animal_bodytype]];
+    _Lab_animal_sex.text = [NSString stringWithFormat:@"動物性別： %@",[TransData getAnimal_SexName:_model.animal_sex]];
+    _Lab_animal_bodytype.text = [NSString stringWithFormat:@"動物體型： %@",[TransData getBodytypeName:_model.animal_bodytype]];
     _Lab_animal_colour.text = [NSString stringWithFormat:@"動物毛色： %@",_model.animal_colour.length > 0?_model.animal_colour:@"不詳"];
-    _Lab_animal_age.text = [NSString stringWithFormat:@"動物體型： %@",[TransData getAnimal_age:_model.animal_age]];
+    _Lab_animal_age.text = [NSString stringWithFormat:@"動物體型： %@",[TransData getAnimal_ageName:_model.animal_age]];
     _Lab_animal_sterilization.text = [NSString stringWithFormat:@"是否節育： %@",[TransData getAnimal_sterilization:_model.animal_sterilization]];
     _Lab_animal_bacterin.text = [NSString stringWithFormat:@"是否施打狂犬病疫苗： %@",[TransData getAnimal_bacterin:_model.animal_bacterin]];
     _Lab_animal_opendate.text = [NSString stringWithFormat:@"開放認養時間： %@",_model.animal_opendate.length > 0?_model.animal_opendate:@"不詳"];

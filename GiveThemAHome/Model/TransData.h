@@ -10,8 +10,11 @@
 
 @interface TransData : NSObject
 +(NSString *)getAnimal_Area:(NSString *)Animal_Area_PkID;
++(NSString *)getAnimal_SexName:(NSString *)animal_Sex;
 +(NSString *)getAnimal_Sex:(NSString *)animal_Sex;
-+(NSString *)getBodytype:(NSString *)animal_bodytype;
++(NSString *)getBodytypeName:(NSString *)animal_bodytype;
++(NSString *)getBodytype:(NSString *)animal_bodytypeName;
++(NSString *)getAnimal_ageName:(NSString *)animal_age;
 +(NSString *)getAnimal_age:(NSString *)animal_age;
 +(NSString *)getAnimal_sterilization:(NSString *)animal_sterilization;
 +(NSString *)getAnimal_bacterin:(NSString *)animal_bacterin;

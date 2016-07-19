@@ -77,7 +77,7 @@
 +(NSMutableDictionary *)getAnimal_Area_Dic
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setObject:@"不限" forKey:@"0"];
+    [dic setObject:@"不限" forKey:@"不限"];
     [dic setObject:@"臺北市" forKey:@"2"];
     [dic setObject:@"新北市" forKey:@"3"];
     [dic setObject:@"基隆市" forKey:@"4"];
@@ -117,12 +117,16 @@
 {
     NSMutableDictionary *dic = [self getAnimal_Area_Dic];
     NSArray *temp = [dic allKeysForObject:area];
-    NSString *key = [temp objectAtIndex:0];
+    NSString *key = @"不限";
+    if (temp.count > 0)
+    {
+        key = [temp objectAtIndex:0];
+    }
     
     return key;
 }
 
-+(NSString *)getAnimal_Sex:(NSString *)animal_Sex
++(NSString *)getAnimal_SexName:(NSString *)animal_Sex
 {
     
     NSString *str ;
@@ -130,14 +134,37 @@
     {
         str = @"母";
     }
-    else
+    else if ([animal_Sex isEqualToString:@"M"])
     {
         str = @"公";
+    }
+    else
+    {
+        str = @"不詳";
     }
     return str;
 }
 
-+(NSString *)getBodytype:(NSString *)animal_bodytype
++(NSString *)getAnimal_Sex:(NSString *)animal_Sex
+{
+    
+    NSString *str ;
+    if ([animal_Sex isEqualToString:@"母"])
+    {
+        str = @"F";
+    }
+    else if ([animal_Sex isEqualToString:@"公"])
+    {
+        str = @"M";
+    }
+    else
+    {
+        str = @"不限";
+    }
+    return str;
+}
+
++(NSString *)getBodytypeName:(NSString *)animal_bodytype
 {
     
     NSString *str ;
@@ -155,7 +182,7 @@
     }
     else if ([animal_bodytype isEqualToString:@"BIG"])
     {
-        str = @"中型";
+        str = @"大型";
     }
     else
     {
@@ -164,7 +191,37 @@
     return str;
 }
 
-+(NSString *)getAnimal_age:(NSString *)animal_age
++(NSString *)getBodytype:(NSString *)animal_bodytypeName
+{
+    NSString *str ;
+    if ([animal_bodytypeName isEqualToString:@"迷你型"])
+    {
+        str = @"MINI";
+    }
+    else if ([animal_bodytypeName isEqualToString:@"小型"])
+    {
+        str = @"SMALL";
+    }
+    else if ([animal_bodytypeName isEqualToString:@"中型"])
+    {
+        str = @"MEDIUM";
+    }
+    else if ([animal_bodytypeName isEqualToString:@"大型"])
+    {
+        str = @"BIG";
+    }
+    else if ([animal_bodytypeName isEqualToString:@"不限"])
+    {
+        str = @"不限";
+    }
+    else
+    {
+        str = @"不詳";
+    }
+    return str;
+}
+
++(NSString *)getAnimal_ageName:(NSString *)animal_age
 {
     
     NSString *str ;
@@ -179,6 +236,24 @@
     else
     {
         str = @"不詳";
+    }
+    return str;
+}
+
++(NSString *)getAnimal_age:(NSString *)animal_age
+{
+    NSString *str ;
+    if ([animal_age isEqualToString:@"幼年"])
+    {
+        str = @"CHILD";
+    }
+    else if ([animal_age isEqualToString:@"成年"])
+    {
+        str = @"ADULT";
+    }
+    else
+    {
+        str = @"不限";
     }
     return str;
 }

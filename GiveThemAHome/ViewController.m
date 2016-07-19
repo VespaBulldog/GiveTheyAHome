@@ -13,12 +13,14 @@
 #import "ImageCache.h"
 #import "SearchViewController.h"
 #import "DetailVC.h"
+#import "TransData.h"
 
 @interface ViewController ()<NSURLSessionDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     int currentPage;
     NSURLSessionConfiguration *defaultConfigObject;
     NSURLSession *defaultSession;
+    NSString *mainURL;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *arr_ImgURL;
@@ -32,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initUserDefaults];
     [self initProperty];
     [self initView];
     [self addACView];
@@ -44,10 +47,27 @@
                                                object:nil];
 }
 
+-(void) initUserDefaults
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:@"haveSearch"])
+    {
+        return;
+    }
+    [defaults setBool:YES forKey:@"haveSearch"];
+    [defaults setObject:@"不限" forKey:@"search_Area"];
+    [defaults setObject:@"不限" forKey:@"search_KindType"];
+    [defaults setObject:@"不限" forKey:@"search_BodyType"];
+    [defaults setObject:@"不限" forKey:@"search_Age"];
+    [defaults setObject:@"不限" forKey:@"search_Color"];
+    [defaults setObject:@"不限" forKey:@"search_Sex"];
+    [defaults synchronize];
+}
+
 //重新撈資料
 - (void) searchAction:(NSNotification*) notification
 {
-    NSDictionary* userInfo = notification.userInfo;
+    mainURL = @"";
     [self addACView];
     _tableView.hidden = YES;
     [self initProperty];
@@ -138,23 +158,95 @@
     [_acView startAnimating];
 }
 
+-(NSString *)makeUrl
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //地區
+    NSString *search_Area = [[TransData getAnimal_Area_DicKeyWithArea:[defaults objectForKey:@"search_Area"]] isEqualToString:@"不限"]?@"":[NSString stringWithFormat:@"animal_area_pkid+like+%@",[TransData getAnimal_Area_DicKeyWithArea:[defaults objectForKey:@"search_Area"]]];
+    //種類
+    NSString *search_KindType = [[defaults objectForKey:@"search_KindType"] isEqualToString:@"不限"]?@"":[NSString stringWithFormat:@"animal_kind+like+%@",[defaults objectForKey:@"search_KindType"]];
+    //體型
+    NSString *search_BodyType = [[defaults objectForKey:@"search_BodyType"] isEqualToString:@"不限"]?@""
+    :[NSString stringWithFormat:@"animal_bodytype+like+%@",[TransData getBodytype:[defaults objectForKey:@"search_BodyType"]]];
+    //年齡
+    NSString *search_Age = [[defaults objectForKey:@"search_Age"] isEqualToString:@"不限"]?@"":[NSString stringWithFormat:@"animal_bodytype+like+%@",[TransData getAnimal_age:[defaults objectForKey:@"search_Age"]]];
+    //毛色
+    NSString *search_Color = [[defaults objectForKey:@"search_Color"] isEqualToString:@"不限"]?@"":[NSString stringWithFormat:@"animal_colour+like+%@",[defaults objectForKey:@"search_Color"]];
+    //性別
+    NSString *search_Sex = [[defaults objectForKey:@"search_Sex"] isEqualToString:@"不限"]?@"":[NSString stringWithFormat:@"animal_sex+like+%@",[TransData getAnimal_Sex:[defaults objectForKey:@"search_Sex"]]];
+    
+    NSString *filter = @"&$filter=";
+    NSString *and = @"+and+";
+    
+    NSArray *arr_Temp = [[NSArray alloc] initWithObjects:search_Area,search_KindType,search_BodyType,search_Age,search_Color,search_Sex,nil];
+    NSMutableArray *marr = [[NSMutableArray alloc] init];
+    NSMutableString *str_Filter= [[NSMutableString alloc] init];
+    for (int i = 0; i < arr_Temp.count; i++)
+    {
+        if (((NSString *)[arr_Temp objectAtIndex:i]).length > 0)
+        {
+            [marr addObject:[arr_Temp objectAtIndex:i]];
+        }
+    }
+
+    if ( marr.count > 0)
+    {
+        for (int i = 0; i < marr.count; i++)
+        {
+            if (str_Filter.length > 0)
+            {
+                [str_Filter appendString:and];
+            }
+            [str_Filter appendString:((NSString *)[marr objectAtIndex:i])];
+        }
+    }
+    
+    
+    
+    NSString *urlWebAddress = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx";
+    NSString *urlPage = [NSString stringWithFormat:@"?$top=3&$skip=%i",currentPage];
+    NSString *str_URL = [NSString stringWithFormat:@"%@%@%@%@",urlWebAddress,urlPage,filter,str_Filter];
+    mainURL = [NSString stringWithFormat:@"%@%@%@%@",urlWebAddress,@"?$top=3&$skip=%i",filter,str_Filter];
+    return str_URL;
+}
+
 #pragma mark 抓取資料
 -(void)getResultData
 {
-    NSString *urlString = [NSString stringWithFormat:
-     @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i&$filter=animal_area_pkid+like+%i"
-     ,currentPage,0];
-//    NSString *urlString = [NSString stringWithFormat:
-//                           @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i&$filter=animal_area_pkid+like+%i+and+animal_kind+like+狗+and+animal_colour+like+虎斑"
-//                           ,currentPage,0];
-
-//    NSString *urlString = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=10&$skip=0&$filter=animal_colour+like+%E8%99%8E%E6%96%91+and+animal_kind+like+%E7%8B%97+and+animal_area_pkid+like+2";
+//        NSString *urlString = [NSString stringWithFormat:
+//         @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i&$filter=animal_area_pkid+like+%i+and+animal_kind+like+狗"
+//         ,currentPage,2];
     
     
-//    "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=1000&$skip=0&$filter=animal_colour+like+虎斑+and+animal_kind+like+狗+and+animal_area_pkid+like+2"
-//    NSString *urlString = [NSString stringWithFormat:@"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i&$filter=animal_area_pkid+like+%i",currentPage,0];
-    //    NSString *urlString = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=1000";
-    NSURL * url = [NSURL URLWithString:urlString];
+    
+//    NSString *urlString;
+//    if (mainURL.length > 0)
+//    {
+//        urlString = [NSString stringWithFormat:@"%@",mainURL,currentPage];
+//    }
+//    else
+//    {
+//        urlString = [self makeUrl];
+//    }
+    
+    
+    NSString *urlString = [self makeUrl];
+//    NSString *urlWebAddress = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx";
+//    NSString *urlPage = [NSString stringWithFormat:@"?$top=3&$skip=%i",currentPage];
+//    NSString *filter = @"&$filter=";
+//    NSString *filter_animal_area_pkid = [NSString stringWithFormat:@"animal_area_pkid+like+%@",@"2"];
+//    NSString *and = @"+and+";
+//    NSString *filter_animal_kind = [NSString stringWithFormat:@"animal_kind+like+%@",@"狗"];
+//    NSString *filter_animal_bodytype = [NSString stringWithFormat:@"animal_bodytype+like+%@",@"BIG"];
+//    NSString *filter_animal_age = [NSString stringWithFormat:@"animal_age+like+%@",@"CHILD"];
+//    NSString *filter_animal_colour = [NSString stringWithFormat:@"animal_colour+like+%@",@"黑"];
+//    NSString *filter_animal_sex = [NSString stringWithFormat:@"animal_sex+like+%@",@"M"];
+//    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@",
+//                           urlWebAddress,urlPage,filter,filter_animal_area_pkid,and,filter_animal_kind,and,filter_animal_bodytype,and,filter_animal_age,and,filter_animal_colour,and,filter_animal_sex
+//                           ];
+    //邊碼 UTF-8
+    NSString *encodeUrl = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL * url = [NSURL URLWithString:encodeUrl];
     
     defaultConfigObject = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
@@ -180,7 +272,10 @@
     NSArray *arrTemp = [[NSArray alloc] init];
     
     arrTemp = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &error];
-//    [_arr_Result addObjectsFromArray:arrTemp];
+//    if (!arrTemp.count > 0)
+//    {
+//        _acView.stopAnimating;
+//    }
     for (int i = 0; i < arrTemp.count ; i++)
     {
         NSDictionary * dic = [arrTemp objectAtIndex:i];

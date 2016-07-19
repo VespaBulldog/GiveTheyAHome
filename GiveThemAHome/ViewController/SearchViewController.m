@@ -75,7 +75,7 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:255.0/255.0f green:52.0/255.0f blue:93.0/255.0f alpha:1]];
 }
 
-//初始化 NSUserDefaults
+//先抓 NSUserDefaults 有的話存入dic_search
 -(void)initNSUserDefaults
 {
     dic_Search = [NSMutableDictionary new];
