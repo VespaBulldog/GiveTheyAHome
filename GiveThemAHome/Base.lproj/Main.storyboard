@@ -481,6 +481,9 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZV-vg-eRi">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="48"/>
+                                                <connections>
+                                                    <action selector="openMap:" destination="zBw-ee-Fm0" eventType="touchUpInside" id="gMb-88-74v"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -589,10 +592,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="531"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zR4-iv-rQ9">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="1038"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="1138"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptg-Ms-tQV">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1038"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1138"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="picture" translatesAutoresizingMaskIntoConstraints="NO" id="gnC-kv-Onb">
                                                                 <rect key="frame" x="0.0" y="20" width="600" height="270"/>
@@ -602,23 +605,23 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Wj-y3-VSl">
-                                                                <rect key="frame" x="30" y="320" width="540" height="200"/>
+                                                                <rect key="frame" x="30" y="320" width="540" height="300"/>
                                                                 <subviews>
                                                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rL2-RB-Wiu">
-                                                                        <rect key="frame" x="10" y="10" width="520" height="180"/>
+                                                                        <rect key="frame" x="10" y="10" width="520" height="280"/>
                                                                     </mapView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="rL2-RB-Wiu" secondAttribute="trailing" constant="10" id="B45-Wl-jAR"/>
-                                                                    <constraint firstAttribute="height" constant="200" id="HNa-p5-NTa"/>
+                                                                    <constraint firstAttribute="height" constant="300" id="HNa-p5-NTa"/>
                                                                     <constraint firstItem="rL2-RB-Wiu" firstAttribute="leading" secondItem="9Wj-y3-VSl" secondAttribute="leading" constant="10" id="Pmq-6X-JHK"/>
                                                                     <constraint firstAttribute="bottom" secondItem="rL2-RB-Wiu" secondAttribute="bottom" constant="10" id="X7G-nP-lQe"/>
                                                                     <constraint firstItem="rL2-RB-Wiu" firstAttribute="top" secondItem="9Wj-y3-VSl" secondAttribute="top" constant="10" id="aFw-63-W3J"/>
                                                                 </constraints>
                                                             </view>
                                                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="16i-ET-3y2">
-                                                                <rect key="frame" x="30" y="550" width="540" height="458"/>
+                                                                <rect key="frame" x="30" y="650" width="540" height="458"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="動物編號：" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efz-Mo-lI2">
                                                                         <rect key="frame" x="10" y="10" width="520" height="18"/>

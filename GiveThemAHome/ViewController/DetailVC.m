@@ -18,6 +18,7 @@
 {
     NSURLSessionConfiguration *defaultConfigObject;
     NSURLSession *defaultSession;
+    MKPointAnnotation * point1;
 }
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgHeight;
@@ -49,6 +50,7 @@
     [super viewDidLoad];
     self.tabBarController.tabBar.hidden = YES;
     [self initUI];
+    _mapView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,6 +83,7 @@
 
 -(void)initImage
 {
+    //如果進來時 img還沒抓到 就去download
     if (!_img)
     {
         [self downLoadImage];
@@ -160,13 +163,14 @@
     //設定title，以設定選取後顯示的字樣
     //設定coordinate，指出所在的經緯度
     //在此建立 shelter_address 的位置
-    MKPointAnnotation * point1;
+    
     point1 = [[MKPointAnnotation alloc] init];
     NSString *oreillyAddress =_model.shelter_address;
     CLGeocoder *myGeocoder = [[CLGeocoder alloc] init];
-    [myGeocoder geocodeAddressString:oreillyAddress completionHandler:^(NSArray*placemarks, NSError *error) {
-        
-        if ([placemarks count] > 0 && error == nil){
+    [myGeocoder geocodeAddressString:oreillyAddress completionHandler:^(NSArray*placemarks, NSError *error)
+    {
+        if ([placemarks count] > 0 && error == nil)
+        {
             NSLog(@"Found %lu placemark(s).", (unsigned long)[placemarks count]);
             CLPlacemark *firstPlacemark = [placemarks objectAtIndex:0];
             point1.coordinate = CLLocationCoordinate2DMake(firstPlacemark.location.coordinate.latitude, firstPlacemark.location.coordinate.longitude);
@@ -182,11 +186,12 @@
             [_mapView setRegion:myRegion];
             
         }
-        else if ([placemarks count] == 0 &&
-                 error == nil){
+        else if ([placemarks count] == 0 && error == nil)
+        {
             NSLog(@"Found no placemarks.");
         }
-        else if (error != nil){
+        else if (error != nil)
+        {
             NSLog(@"An error occurred = %@", error);
         }
     }];
@@ -197,9 +202,51 @@
     //實際將大頭針釘在地圖上，
     //以標出位置
     self.mapView.showsUserLocation = YES;
+    self.mapView.scrollEnabled = NO;
     [self.mapView addAnnotation:point1];
-
     
+//    NSArray *arr = [[NSArray alloc] initWithObjects:point1, nil];
+//    [self.mapView setSelectedAnnotations:arr];
+    
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    MKAnnotationView *pinView = nil;
+    if(annotation != mapView.userLocation)
+    {
+        static NSString *defaultPinID = @"com.invasivecode.pin";
+        pinView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        if ( pinView == nil )
+            pinView = [[MKAnnotationView alloc]
+                       initWithAnnotation:annotation reuseIdentifier:defaultPinID];
+        pinView.canShowCallout = YES;
+        UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        [rightButton setImage:[UIImage imageNamed:@"icon_right_arrows"] forState:UIControlStateNormal];
+        rightButton.imageEdgeInsets = UIEdgeInsetsMake(15,15,15,15);
+        rightButton.backgroundColor = [UIColor colorWithRed:255.0/255.0f green:52.0/255.0f blue:93.0/255.0f alpha:1];
+        [rightButton setTitle:@"" forState:UIControlStateNormal];
+        [rightButton addTarget:self action:@selector(openMap:) forControlEvents:UIControlEventTouchUpInside];
+        pinView.rightCalloutAccessoryView = rightButton;
+        pinView.image = [UIImage imageNamed:@"location"];    //as suggested by Squatch
+        pinView.annotation = annotation;
+    }
+    else
+    {
+//        [mapView.userLocation setTitle:@"I am here"];
+    }
+    
+    return pinView;
+}
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    [self performSelector:@selector(selectInitialAnnotation) withObject:nil afterDelay:0.5];
+}
+
+//讓 大頭針被 selected
+-(void)selectInitialAnnotation {
+    [self.mapView selectAnnotation:point1 animated:YES];
 }
 
 -(void)initLabel
@@ -220,6 +267,15 @@
     _Lab_animal_bacterin.text = [NSString stringWithFormat:@"是否施打狂犬病疫苗： %@",[TransData getAnimal_bacterin:_model.animal_bacterin]];
     _Lab_animal_opendate.text = [NSString stringWithFormat:@"開放認養時間： %@",_model.animal_opendate.length > 0?_model.animal_opendate:@"不詳"];
     _Lab_animal_remark.text = [NSString stringWithFormat:@"備註： %@",_model.animal_remark];
+}
+- (IBAction)openMap:(id)sender
+{
+    if (_model.shelter_address.length > 0)
+    {
+        NSString *addressString = [[NSString stringWithFormat:@"https://maps.apple.com/maps?q=%@",_model.shelter_address] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *url = [NSURL URLWithString:addressString];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 @end

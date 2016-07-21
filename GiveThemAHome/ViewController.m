@@ -206,6 +206,8 @@
     NSString *urlWebAddress = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx";
     NSString *urlPage = [NSString stringWithFormat:@"?$top=3&$skip=%i",currentPage];
     NSString *str_URL = [NSString stringWithFormat:@"%@%@%@%@",urlWebAddress,urlPage,filter,str_Filter];
+    
+    //filter只組一次 之後就不組 所以存在mainURL
     mainURL = [NSString stringWithFormat:@"%@%@%@%@",urlWebAddress,@"?$top=3&$skip=%i",filter,str_Filter];
     return str_URL;
 }
@@ -213,37 +215,17 @@
 #pragma mark 抓取資料
 -(void)getResultData
 {
-//        NSString *urlString = [NSString stringWithFormat:
-//         @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i&$filter=animal_area_pkid+like+%i+and+animal_kind+like+狗"
-//         ,currentPage,2];
+//"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx?$top=3&$skip=%i&$filter=animal_area_pkid+like+%i+and+animal_kind+like+狗
+    NSString *urlString;
+    if (mainURL.length > 0)
+    {
+        urlString = [NSString stringWithFormat:mainURL,currentPage];
+    }
+    else
+    {
+        urlString = [self makeUrl];
+    }
     
-    
-    
-//    NSString *urlString;
-//    if (mainURL.length > 0)
-//    {
-//        urlString = [NSString stringWithFormat:@"%@",mainURL,currentPage];
-//    }
-//    else
-//    {
-//        urlString = [self makeUrl];
-//    }
-    
-    
-    NSString *urlString = [self makeUrl];
-//    NSString *urlWebAddress = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx";
-//    NSString *urlPage = [NSString stringWithFormat:@"?$top=3&$skip=%i",currentPage];
-//    NSString *filter = @"&$filter=";
-//    NSString *filter_animal_area_pkid = [NSString stringWithFormat:@"animal_area_pkid+like+%@",@"2"];
-//    NSString *and = @"+and+";
-//    NSString *filter_animal_kind = [NSString stringWithFormat:@"animal_kind+like+%@",@"狗"];
-//    NSString *filter_animal_bodytype = [NSString stringWithFormat:@"animal_bodytype+like+%@",@"BIG"];
-//    NSString *filter_animal_age = [NSString stringWithFormat:@"animal_age+like+%@",@"CHILD"];
-//    NSString *filter_animal_colour = [NSString stringWithFormat:@"animal_colour+like+%@",@"黑"];
-//    NSString *filter_animal_sex = [NSString stringWithFormat:@"animal_sex+like+%@",@"M"];
-//    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@",
-//                           urlWebAddress,urlPage,filter,filter_animal_area_pkid,and,filter_animal_kind,and,filter_animal_bodytype,and,filter_animal_age,and,filter_animal_colour,and,filter_animal_sex
-//                           ];
     //邊碼 UTF-8
     NSString *encodeUrl = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL * url = [NSURL URLWithString:encodeUrl];
