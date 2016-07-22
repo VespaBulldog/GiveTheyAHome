@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		203A4A461D41C9EB000EE1BF /* AnimalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 203A4A441D41C9EB000EE1BF /* AnimalModel.xcdatamodeld */; };
+		203A4A511D41CB06000EE1BF /* Animal+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 203A4A4E1D41CB06000EE1BF /* Animal+CoreDataProperties.m */; };
+		203A4A521D41CB06000EE1BF /* Animal.m in Sources */ = {isa = PBXBuildFile; fileRef = 203A4A501D41CB06000EE1BF /* Animal.m */; };
 		206D32291D2A622F00055ED5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D32281D2A622F00055ED5 /* main.m */; };
 		206D322C1D2A622F00055ED5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D322B1D2A622F00055ED5 /* AppDelegate.m */; };
 		206D322F1D2A622F00055ED5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D322E1D2A622F00055ED5 /* ViewController.m */; };
@@ -20,6 +23,8 @@
 		206D32931D2BCA0400055ED5 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 206D32911D2BCA0400055ED5 /* ListCell.m */; };
 		206D32941D2BCA0500055ED5 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206D32921D2BCA0400055ED5 /* ListCell.xib */; };
 		2098FE071D3F6E11009A0D55 /* CustomMKPAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2098FE061D3F6E11009A0D55 /* CustomMKPAnnotation.m */; };
+		20B768751D41CC610016B7C4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B768741D41CC610016B7C4 /* CoreData.framework */; };
+		20B768791D41CF260016B7C4 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20B768781D41CF260016B7C4 /* CoreDataManager.m */; };
 		2C065DE91D32057A00A76D3A /* DetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C065DE81D32057A00A76D3A /* DetailVC.m */; };
 		2C065E2E1D32492500A76D3A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C065E2D1D32492500A76D3A /* MapKit.framework */; };
 		2C065E301D324A1200A76D3A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C065E2F1D324A1200A76D3A /* CoreLocation.framework */; };
@@ -48,6 +53,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		203A4A451D41C9EB000EE1BF /* AnimalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AnimalModel.xcdatamodel; sourceTree = "<group>"; };
+		203A4A4D1D41CB06000EE1BF /* Animal+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Animal+CoreDataProperties.h"; path = "Model/Animal+CoreDataProperties.h"; sourceTree = "<group>"; };
+		203A4A4E1D41CB06000EE1BF /* Animal+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Animal+CoreDataProperties.m"; path = "Model/Animal+CoreDataProperties.m"; sourceTree = "<group>"; };
+		203A4A4F1D41CB06000EE1BF /* Animal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animal.h; path = Model/Animal.h; sourceTree = "<group>"; };
+		203A4A501D41CB06000EE1BF /* Animal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Animal.m; path = Model/Animal.m; sourceTree = "<group>"; };
 		206D32241D2A622F00055ED5 /* GiveThemAHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiveThemAHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		206D32281D2A622F00055ED5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		206D322A1D2A622F00055ED5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -72,6 +82,9 @@
 		206D32921D2BCA0400055ED5 /* ListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 		2098FE051D3F6E11009A0D55 /* CustomMKPAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomMKPAnnotation.h; path = CustomMKPAnnotation/CustomMKPAnnotation.h; sourceTree = "<group>"; };
 		2098FE061D3F6E11009A0D55 /* CustomMKPAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomMKPAnnotation.m; path = CustomMKPAnnotation/CustomMKPAnnotation.m; sourceTree = "<group>"; };
+		20B768741D41CC610016B7C4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		20B768771D41CF260016B7C4 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = Class/CoreDataManager.h; sourceTree = "<group>"; };
+		20B768781D41CF260016B7C4 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = Class/CoreDataManager.m; sourceTree = "<group>"; };
 		2C065DE71D32057A00A76D3A /* DetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailVC.h; path = ViewController/DetailVC.h; sourceTree = "<group>"; };
 		2C065DE81D32057A00A76D3A /* DetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailVC.m; path = ViewController/DetailVC.m; sourceTree = "<group>"; };
 		2C065E2D1D32492500A76D3A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -93,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20B768751D41CC610016B7C4 /* CoreData.framework in Frameworks */,
 				2C065E321D324A1B00A76D3A /* CoreGraphics.framework in Frameworks */,
 				2C065E301D324A1200A76D3A /* CoreLocation.framework in Frameworks */,
 				2C065E2E1D32492500A76D3A /* MapKit.framework in Frameworks */,
@@ -119,6 +133,7 @@
 		206D321B1D2A622F00055ED5 = {
 			isa = PBXGroup;
 			children = (
+				20B768741D41CC610016B7C4 /* CoreData.framework */,
 				2C065E331D324A2500A76D3A /* UIKit.framework */,
 				2C065E311D324A1B00A76D3A /* CoreGraphics.framework */,
 				2C065E2F1D324A1200A76D3A /* CoreLocation.framework */,
@@ -145,12 +160,14 @@
 			children = (
 				206D322A1D2A622F00055ED5 /* AppDelegate.h */,
 				206D322B1D2A622F00055ED5 /* AppDelegate.m */,
+				20B768761D41CF040016B7C4 /* Class */,
 				2C6FA45C1D2F9D0F00EB40A3 /* Model */,
 				2C6FA4631D2FA68D00EB40A3 /* Cache */,
 				2C6FA4641D310B8200EB40A3 /* ViewController */,
 				206D325A1D2A629A00055ED5 /* View */,
 				206D32331D2A622F00055ED5 /* Assets.xcassets */,
 				206D32351D2A622F00055ED5 /* LaunchScreen.storyboard */,
+				203A4A441D41C9EB000EE1BF /* AnimalModel.xcdatamodeld */,
 				206D32381D2A622F00055ED5 /* Info.plist */,
 				206D32271D2A622F00055ED5 /* Supporting Files */,
 			);
@@ -222,6 +239,15 @@
 			name = CustomMKPAnnotation;
 			sourceTree = "<group>";
 		};
+		20B768761D41CF040016B7C4 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				20B768771D41CF260016B7C4 /* CoreDataManager.h */,
+				20B768781D41CF260016B7C4 /* CoreDataManager.m */,
+			);
+			name = Class;
+			sourceTree = "<group>";
+		};
 		2C6FA45C1D2F9D0F00EB40A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +255,10 @@
 				2C6FA45E1D2F9D3400EB40A3 /* DataModel.m */,
 				2C065E351D32626C00A76D3A /* TransData.h */,
 				2C065E361D32626C00A76D3A /* TransData.m */,
+				203A4A4D1D41CB06000EE1BF /* Animal+CoreDataProperties.h */,
+				203A4A4E1D41CB06000EE1BF /* Animal+CoreDataProperties.m */,
+				203A4A4F1D41CB06000EE1BF /* Animal.h */,
+				203A4A501D41CB06000EE1BF /* Animal.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -396,8 +426,12 @@
 				206D32291D2A622F00055ED5 /* main.m in Sources */,
 				2C6FA45F1D2F9D3400EB40A3 /* DataModel.m in Sources */,
 				206D32931D2BCA0400055ED5 /* ListCell.m in Sources */,
+				203A4A461D41C9EB000EE1BF /* AnimalModel.xcdatamodeld in Sources */,
 				2C065E371D32626C00A76D3A /* TransData.m in Sources */,
 				206D32621D2A637200055ED5 /* TitleView.m in Sources */,
+				203A4A511D41CB06000EE1BF /* Animal+CoreDataProperties.m in Sources */,
+				203A4A521D41CB06000EE1BF /* Animal.m in Sources */,
+				20B768791D41CF260016B7C4 /* CoreDataManager.m in Sources */,
 				2C6FA4671D310BCC00EB40A3 /* SearchViewController.m in Sources */,
 				2C6FA4621D2FA68200EB40A3 /* ImageCache.m in Sources */,
 			);
@@ -656,6 +690,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		203A4A441D41C9EB000EE1BF /* AnimalModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				203A4A451D41C9EB000EE1BF /* AnimalModel.xcdatamodel */,
+			);
+			currentVersion = 203A4A451D41C9EB000EE1BF /* AnimalModel.xcdatamodel */;
+			path = AnimalModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 206D321C1D2A622F00055ED5 /* Project object */;
 }

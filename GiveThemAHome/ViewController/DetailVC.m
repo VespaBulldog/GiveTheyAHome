@@ -50,6 +50,7 @@
     [super viewDidLoad];
     self.tabBarController.tabBar.hidden = YES;
     [self initUI];
+    _model.animal_id = @"xxx";
     _mapView.delegate = self;
 }
 
@@ -207,8 +208,8 @@
     
 //    NSArray *arr = [[NSArray alloc] initWithObjects:point1, nil];
 //    [self.mapView setSelectedAnnotations:arr];
-    
 }
+
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
@@ -239,6 +240,7 @@
     return pinView;
 }
 
+//when pinView add then open bubbel
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
 {
     [self performSelector:@selector(selectInitialAnnotation) withObject:nil afterDelay:0.5];

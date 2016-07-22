@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *openDateLab;
 @property (weak, nonatomic) IBOutlet UIButton *btn_Like;
 @property (weak, nonatomic) IBOutlet UIButton *btn_Push;
+@property (weak, nonatomic) IBOutlet UIImageView *img_Favorite;
 
 @end

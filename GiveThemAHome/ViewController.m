@@ -14,6 +14,8 @@
 #import "SearchViewController.h"
 #import "DetailVC.h"
 #import "TransData.h"
+#import "Animal.h"
+#import "CoreDataManager.h"
 
 @interface ViewController ()<NSURLSessionDelegate,UITableViewDelegate,UITableViewDataSource>
 {
@@ -21,12 +23,15 @@
     NSURLSessionConfiguration *defaultConfigObject;
     NSURLSession *defaultSession;
     NSString *mainURL;
+    BOOL isLast;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *arr_ImgURL;
 @property (nonatomic, strong) NSMutableArray *arr_Result;
+@property (nonatomic, strong) NSMutableArray *arr_Favorite;
 @property (nonatomic, strong) NSOperationQueue *imageQueue;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *acView;
+@property (nonatomic, strong) UIImageView *ac;
 @property (nonatomic, strong) ImageCache *cache;
 @end
 
@@ -38,6 +43,7 @@
     [self initProperty];
     [self initView];
     [self addACView];
+    [self getFavorite];
     [self getResultData];
     
     //註冊通知中心 當按下搜尋要重新撈資料
@@ -88,9 +94,15 @@
     [super viewDidLayoutSubviews];
 }
 
+-(void) viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 -(void)initProperty
@@ -101,6 +113,7 @@
     _imageQueue.maxConcurrentOperationCount = 3;
     _arr_Result = [[NSMutableArray alloc] init];
     _cache = [ImageCache sharedImageCache];
+    isLast = NO;
 }
 
 -(void)initView
@@ -138,15 +151,15 @@
 {
     //把 UIActivityIndicatorView 加到 tableFooterView
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 36)];
-    UIImageView *ac = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,16,16)];
+    _ac = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,16,16)];
     
-    ac.animationImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"ac-1"],[UIImage imageNamed:@"ac-2"],[UIImage imageNamed:@"ac-3"],nil];
-    ac.animationDuration = 1.0; // in seconds
-    ac.animationRepeatCount = 0; // sets to loop
-    [ac startAnimating];
-    ac.center = view.center;
-    [ac startAnimating];
-    [view addSubview:ac]; // <-- Your UIActivityIndicatorView
+    _ac.animationImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"ac-1"],[UIImage imageNamed:@"ac-2"],[UIImage imageNamed:@"ac-3"],nil];
+    _ac.animationDuration = 1.0; // in seconds
+    _ac.animationRepeatCount = 0; // sets to loop
+    [_ac startAnimating];
+    _ac.center = view.center;
+    [_ac startAnimating];
+    [view addSubview:_ac]; // <-- Your UIActivityIndicatorView
     
     return view;
 }
@@ -212,6 +225,13 @@
     return str_URL;
 }
 
+#pragma mark 抓取我的最愛資料
+-(void)getFavorite
+{
+    _arr_Favorite = [[NSMutableArray alloc] init];
+    _arr_Favorite = [CoreDataManager getAllResult];
+}
+
 #pragma mark 抓取資料
 -(void)getResultData
 {
@@ -232,7 +252,7 @@
     
     defaultConfigObject = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: self delegateQueue: [NSOperationQueue mainQueue]];
-    
+    _ac.startAnimating;
     NSURLSessionDataTask * dataTask = [defaultSession dataTaskWithURL:url
                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                         if(error == nil)
@@ -254,14 +274,26 @@
     NSArray *arrTemp = [[NSArray alloc] init];
     
     arrTemp = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &error];
-//    if (!arrTemp.count > 0)
-//    {
-//        _acView.stopAnimating;
-//    }
+    if (arrTemp.count < 3)
+    {
+        isLast = YES;
+        _ac.stopAnimating;
+    }
+    //to do to do
     for (int i = 0; i < arrTemp.count ; i++)
     {
         NSDictionary * dic = [arrTemp objectAtIndex:i];
         DataModel *m = [DataModel modelDataWithDic:dic];
+        m.is_favorite = NO;
+//        Animal *m = [Animal modelDataWithDic:dic];
+        for (int j = 0; j < _arr_Favorite.count; j++)
+        {
+            DataModel * d= [_arr_Favorite objectAtIndex:j];
+            if ([m.animal_id isEqualToString:d.animal_id])
+            {
+                m.is_favorite = YES;
+            }
+        }
         [_arr_Result addObject:m];
         [_arr_ImgURL addObject:m.album_file];
     }
@@ -272,15 +304,12 @@
 //載入下一夜
 -(void)loadNextPage
 {
+    if (isLast)
+    {
+        return;
+    }
     currentPage = currentPage +3;
     [self getResultData];
-}
-
-#pragma mark Like
-//加入最愛項目
--(void)likeAct
-{
-    NSLog(@"Like");
 }
 
 #pragma mark 下載照片
@@ -352,6 +381,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ListCell *cell = (ListCell *)[_tableView dequeueReusableCellWithIdentifier:@"ListCell"];
     DataModel *model = [_arr_Result objectAtIndex:indexPath.row];
+//    Animal *model = [_arr_Result objectAtIndex:indexPath.row];
     NSString *animal_remark = model.animal_remark;
     NSString *animal_sex;
     NSInteger animal_kind;
@@ -427,8 +457,21 @@
     cell.IDLab.text = model.animal_id;
     cell.locationLab.text = model.animal_place.length > 0? model.animal_place : @"無描述資料";
     cell.openDateLab.text = model.animal_opendate.length > 0? model.animal_opendate : @"無描述資料";
-    [cell.btn_Like addTarget:self action:@selector(likeAct) forControlEvents:UIControlEventTouchUpInside];
+    
+    //
+    BOOL isExistInCoreData = [CoreDataManager checkExistByAnimal_id:model.animal_id];
+    if (isExistInCoreData)
+    {
+        [cell.img_Favorite setImage:[UIImage imageNamed:@"heart-2"]];
+    }
+    else
+    {
+        [cell.img_Favorite setImage:[UIImage imageNamed:@"heart-1"]];
+    }
+    
+    [cell.btn_Like addTarget:self action:@selector(likeAct:) forControlEvents:UIControlEventTouchUpInside];
     cell.btn_Push.tag = indexPath.row;
+    cell.btn_Like.tag = indexPath.row;
     [cell.btn_Push addTarget:self action:@selector(pushAct:) forControlEvents:UIControlEventTouchUpInside];
     //照片
     NSString *str_ImgURL = model.album_file;
@@ -468,6 +511,11 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
 //進入detail 頁面
 -(IBAction) pushAct:(id)sender
 {
@@ -476,12 +524,20 @@
     DetailVC *detailVC = [storyBoard instantiateViewControllerWithIdentifier:@"DetailVC"];
     detailVC.hidesBottomBarWhenPushed = YES;
     detailVC.img = img;
-    detailVC.model = [_arr_Result objectAtIndex:((UIButton *)sender).tag];
+    DataModel *model = [_arr_Result objectAtIndex:((UIButton *)sender).tag];
+    detailVC.model = model;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark Like
+//加入最愛項目
+-(IBAction)likeAct:(id)sender
 {
-    
+    DataModel *m = [_arr_Result objectAtIndex:((UIButton *)sender).tag];
+    [CoreDataManager save:m];
+    NSIndexPath *index = [NSIndexPath indexPathForRow:((UIButton *)sender).tag inSection:0];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
+    });
 }
 @end

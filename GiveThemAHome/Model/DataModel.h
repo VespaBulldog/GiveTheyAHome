@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, AnimalKind)
 @property (nonatomic, copy) NSString *shelter_address;
 @property (nonatomic, copy) NSString *shelter_name;
 @property (nonatomic, copy) NSString *shelter_tel;  //29
+@property (nonatomic, assign) BOOL is_favorite;
 - (instancetype)initWithDic:(NSDictionary *)dic;
 + (instancetype)modelDataWithDic:(NSDictionary *)dic;
 @end
