@@ -515,6 +515,9 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mnE-Zw-MfF">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="48"/>
+                                                <connections>
+                                                    <action selector="callPhone:" destination="zBw-ee-Fm0" eventType="touchUpInside" id="Lt7-8t-eiM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -546,6 +549,9 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujD-O8-g84">
                                                 <rect key="frame" x="0.0" y="0.0" width="198" height="48"/>
+                                                <connections>
+                                                    <action selector="like_Act:" destination="zBw-ee-Fm0" eventType="touchUpInside" id="Q1o-wA-Hvo"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -851,6 +857,7 @@
                         <outlet property="Lab_animal_remark" destination="abX-vN-FhI" id="ghY-Ll-9Cg"/>
                         <outlet property="Lab_animal_sex" destination="7oT-Ns-3KR" id="ZZO-tc-c9u"/>
                         <outlet property="Lab_animal_sterilization" destination="JbU-UP-Ybk" id="UQh-Qu-9Lg"/>
+                        <outlet property="btn_Favorite" destination="xRJ-m9-JaL" id="kao-x0-rcC"/>
                         <outlet property="imageView" destination="gnC-kv-Onb" id="3lP-jy-hIC"/>
                         <outlet property="imgHeight" destination="bPT-Nq-Lwv" id="U9n-fg-AOM"/>
                         <outlet property="imgWidth" destination="bRK-2T-ZOR" id="Wbb-bd-Vbl"/>
@@ -867,7 +874,7 @@
         <!--最愛浪浪-->
         <scene sceneID="2yH-Zt-rhC">
             <objects>
-                <viewController id="KNi-gH-E1R" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoriteVC" id="KNi-gH-E1R" customClass="FavoriteVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Y8u-gH-6C9"/>
                         <viewControllerLayoutGuide type="bottom" id="ntv-6g-AZo"/>
@@ -875,10 +882,33 @@
                     <view key="view" contentMode="scaleToFill" id="o0y-la-md0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zIW-Jg-BSW">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="zIW-Jg-BSW" secondAttribute="trailing" id="7R8-Je-8Wd"/>
+                            <constraint firstItem="zIW-Jg-BSW" firstAttribute="leading" secondItem="o0y-la-md0" secondAttribute="leadingMargin" id="AoR-yf-AEN"/>
+                            <constraint firstItem="ntv-6g-AZo" firstAttribute="top" secondItem="zIW-Jg-BSW" secondAttribute="bottom" constant="-49" id="R0M-PW-hzF"/>
+                            <constraint firstAttribute="trailing" secondItem="zIW-Jg-BSW" secondAttribute="trailing" id="XDJ-JM-bWh"/>
+                            <constraint firstItem="zIW-Jg-BSW" firstAttribute="top" secondItem="o0y-la-md0" secondAttribute="topMargin" id="qS6-AW-pGb"/>
+                            <constraint firstItem="zIW-Jg-BSW" firstAttribute="leading" secondItem="o0y-la-md0" secondAttribute="leading" id="tt2-IQ-SXu"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7R8-Je-8Wd"/>
+                                <exclude reference="AoR-yf-AEN"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="最愛浪浪" image="heart" id="5vt-82-nyS"/>
                     <navigationItem key="navigationItem" id="pY0-16-lRR"/>
+                    <connections>
+                        <outlet property="tableView" destination="zIW-Jg-BSW" id="HHs-N1-WYP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZH-4f-Nq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

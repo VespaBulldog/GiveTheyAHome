@@ -23,7 +23,7 @@
     return context;
 }
 
-+ (void)save:(DataModel *)model
++ (void)saveOrDelete:(DataModel *)model
 {
     //如果已存在就刪除
     if ([CoreDataManager checkExistByAnimal_id:model.animal_id])
@@ -36,6 +36,7 @@
         {
             NSLog(@"error");
         }
+        model.is_favorite = NO;
         return;
     }
     //沒存在就新增
@@ -72,7 +73,7 @@
     [newDate setValue:model.shelter_address.length > 0 ?model.shelter_address:@"" forKey:@"shelter_address"];
     [newDate setValue:model.shelter_name.length > 0 ?model.shelter_name:@"" forKey:@"shelter_name"];
     [newDate setValue:model.shelter_tel.length > 0 ?model.shelter_tel:@"" forKey:@"shelter_tel"];
-    
+    model.is_favorite = YES;
     NSError *error = nil;
     if (![context save:&error])
     {

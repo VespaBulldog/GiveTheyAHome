@@ -13,8 +13,9 @@
 #import "TransData.h"
 #import "TitleView.h"
 #import "ImageCache.h"
+#import "CoreDataManager.h"
 
-@interface DetailVC ()<NSURLSessionDelegate>
+@interface DetailVC ()<NSURLSessionDelegate,MKMapViewDelegate>
 {
     NSURLSessionConfiguration *defaultConfigObject;
     NSURLSession *defaultSession;
@@ -39,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *Lab_animal_bacterin;
 @property (weak, nonatomic) IBOutlet UILabel *Lab_animal_opendate;
 @property (weak, nonatomic) IBOutlet UILabel *Lab_animal_remark;
+@property (weak, nonatomic) IBOutlet UIImageView *btn_Favorite;
 @property (nonatomic, strong) NSOperationQueue *imageQueue;
 @property (nonatomic, strong) ImageCache *cache;
 
@@ -50,7 +52,6 @@
     [super viewDidLoad];
     self.tabBarController.tabBar.hidden = YES;
     [self initUI];
-    _model.animal_id = @"xxx";
     _mapView.delegate = self;
 }
 
@@ -247,7 +248,8 @@
 }
 
 //讓 大頭針被 selected
--(void)selectInitialAnnotation {
+-(void)selectInitialAnnotation
+{
     [self.mapView selectAnnotation:point1 animated:YES];
 }
 
@@ -278,6 +280,44 @@
         NSURL *url = [NSURL URLWithString:addressString];
         [[UIApplication sharedApplication] openURL:url];
     }
+}
+
+-(IBAction)callPhone:(id)sender
+{
+
+    UIAlertView *alert;
+    if (_model.shelter_tel.length > 0)
+    {
+        alert = [[UIAlertView alloc]initWithTitle: @"是否要撥打電話"
+                                                       message: [NSString stringWithFormat:@"%@%@",@"tel:",_model.shelter_tel]
+                                                      delegate: self
+                                             cancelButtonTitle:@"取消"
+                                             otherButtonTitles:@"確定",nil];
+    }
+    else
+    {
+        alert = [[UIAlertView alloc]initWithTitle: @"電話號碼不詳"
+                                          message: @""
+                                         delegate: self
+                                cancelButtonTitle:@"取消"
+                                otherButtonTitles:nil,nil];
+    }
+    
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"tel:",_model.shelter_tel]]];
+    }
+}
+
+- (IBAction)like_Act:(id)sender
+{
+    [CoreDataManager saveOrDelete:_model];
+//    _btn_Favorite.image = [UIImage imageNamed:@"heart-1"];
 }
 
 @end

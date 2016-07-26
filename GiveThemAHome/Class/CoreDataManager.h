@@ -11,7 +11,7 @@
 #import "DataModel.h"
 
 @interface CoreDataManager : NSObject
-+ (void)save:(DataModel *)model;
++ (void)saveOrDelete:(DataModel *)model;
 + (NSMutableArray *)getAllResult;
 +(BOOL)checkExistByAnimal_id:(NSString *)animal_id;
 @end

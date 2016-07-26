@@ -43,16 +43,12 @@
     [self initProperty];
     [self initView];
     [self addACView];
-    [self getFavorite];
     [self getResultData];
+    [self setNotificationCenter];
     
-    //註冊通知中心 當按下搜尋要重新撈資料
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(searchAction:)
-                                                 name:@"searchAction"
-                                               object:nil];
 }
 
+//判斷有無搜尋條件
 -(void) initUserDefaults
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -70,17 +66,7 @@
     [defaults synchronize];
 }
 
-//重新撈資料
-- (void) searchAction:(NSNotification*) notification
-{
-    mainURL = @"";
-    [self addACView];
-    _tableView.hidden = YES;
-    [self initProperty];
-    [_cache.allDownloadOperationCache removeAllObjects];
-    [_cache.allImageCache removeAllObjects];
-    [self getResultData];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -102,6 +88,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self getFavorite];
     [self.tableView reloadData];
 }
 
@@ -214,8 +201,6 @@
         }
     }
     
-    
-    
     NSString *urlWebAddress = @"http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx";
     NSString *urlPage = [NSString stringWithFormat:@"?$top=3&$skip=%i",currentPage];
     NSString *str_URL = [NSString stringWithFormat:@"%@%@%@%@",urlWebAddress,urlPage,filter,str_Filter];
@@ -230,6 +215,30 @@
 {
     _arr_Favorite = [[NSMutableArray alloc] init];
     _arr_Favorite = [CoreDataManager getAllResult];
+}
+
+#pragma mark 搜尋條件段
+//註冊通知中心 當按下搜尋要重新撈資料
+-(void) setNotificationCenter
+{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(searchAction:)
+                                                 name:@"searchAction"
+                                               object:nil];
+}
+
+//下搜尋條件後重新撈資料
+- (void) searchAction:(NSNotification*) notification
+{
+    mainURL = @"";
+    [self addACView];
+    _tableView.hidden = YES;
+    [self initProperty];
+    [_cache.allDownloadOperationCache removeAllObjects];
+    [_cache.allImageCache removeAllObjects];
+    [self getResultData];
+    [self getFavorite];
 }
 
 #pragma mark 抓取資料
@@ -301,7 +310,7 @@
     [_tableView reloadData];
 }
 
-//載入下一夜
+//載入下一頁
 -(void)loadNextPage
 {
     if (isLast)
@@ -458,8 +467,8 @@
     cell.locationLab.text = model.animal_place.length > 0? model.animal_place : @"無描述資料";
     cell.openDateLab.text = model.animal_opendate.length > 0? model.animal_opendate : @"無描述資料";
     
-    //
-    BOOL isExistInCoreData = [CoreDataManager checkExistByAnimal_id:model.animal_id];
+    //判斷我的最愛內有沒有資料
+    BOOL isExistInCoreData = model.is_favorite;
     if (isExistInCoreData)
     {
         [cell.img_Favorite setImage:[UIImage imageNamed:@"heart-2"]];
@@ -529,12 +538,12 @@
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-#pragma mark Like
+#pragma mark 加入最愛項目
 //加入最愛項目
 -(IBAction)likeAct:(id)sender
 {
     DataModel *m = [_arr_Result objectAtIndex:((UIButton *)sender).tag];
-    [CoreDataManager save:m];
+    [CoreDataManager saveOrDelete:m];
     NSIndexPath *index = [NSIndexPath indexPathForRow:((UIButton *)sender).tag inSection:0];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
