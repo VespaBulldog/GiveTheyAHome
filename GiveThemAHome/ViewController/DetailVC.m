@@ -289,7 +289,7 @@
     if (_model.shelter_tel.length > 0)
     {
         alert = [[UIAlertView alloc]initWithTitle: @"是否要撥打電話"
-                                                       message: [NSString stringWithFormat:@"%@%@",@"tel:",_model.shelter_tel]
+                                                       message: [NSString stringWithFormat:@"%@%@",@"TEL：",_model.shelter_tel]
                                                       delegate: self
                                              cancelButtonTitle:@"取消"
                                              otherButtonTitles:@"確定",nil];

@@ -887,12 +887,36 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37f-Jx-G6m">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最愛浪浪尚無資料，快去看看浪浪裡加入最愛浪浪！" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9I-gX-Ngj">
+                                        <rect key="frame" x="170" y="250" width="260" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="L9x-n0-puK"/>
+                                            <constraint firstAttribute="width" constant="260" id="rzs-00-StD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="M9I-gX-Ngj" firstAttribute="centerY" secondItem="37f-Jx-G6m" secondAttribute="centerY" id="N2j-XZ-ELM"/>
+                                    <constraint firstItem="M9I-gX-Ngj" firstAttribute="centerX" secondItem="37f-Jx-G6m" secondAttribute="centerX" id="Vrq-Kc-PzH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="zIW-Jg-BSW" secondAttribute="trailing" id="7R8-Je-8Wd"/>
                             <constraint firstItem="zIW-Jg-BSW" firstAttribute="leading" secondItem="o0y-la-md0" secondAttribute="leadingMargin" id="AoR-yf-AEN"/>
+                            <constraint firstItem="37f-Jx-G6m" firstAttribute="leading" secondItem="o0y-la-md0" secondAttribute="leading" id="Kgt-OZ-RM3"/>
                             <constraint firstItem="ntv-6g-AZo" firstAttribute="top" secondItem="zIW-Jg-BSW" secondAttribute="bottom" constant="-49" id="R0M-PW-hzF"/>
+                            <constraint firstItem="37f-Jx-G6m" firstAttribute="top" secondItem="o0y-la-md0" secondAttribute="top" id="RJp-PE-Hgv"/>
+                            <constraint firstAttribute="bottom" secondItem="37f-Jx-G6m" secondAttribute="bottom" id="S3a-J1-h26"/>
+                            <constraint firstAttribute="trailing" secondItem="37f-Jx-G6m" secondAttribute="trailing" id="ToM-uB-TtG"/>
                             <constraint firstAttribute="trailing" secondItem="zIW-Jg-BSW" secondAttribute="trailing" id="XDJ-JM-bWh"/>
                             <constraint firstItem="zIW-Jg-BSW" firstAttribute="top" secondItem="o0y-la-md0" secondAttribute="topMargin" id="qS6-AW-pGb"/>
                             <constraint firstItem="zIW-Jg-BSW" firstAttribute="leading" secondItem="o0y-la-md0" secondAttribute="leading" id="tt2-IQ-SXu"/>
@@ -907,6 +931,7 @@
                     <tabBarItem key="tabBarItem" title="最愛浪浪" image="heart" id="5vt-82-nyS"/>
                     <navigationItem key="navigationItem" id="pY0-16-lRR"/>
                     <connections>
+                        <outlet property="emptyView" destination="37f-Jx-G6m" id="eUD-vz-p6e"/>
                         <outlet property="tableView" destination="zIW-Jg-BSW" id="HHs-N1-WYP"/>
                     </connections>
                 </viewController>
@@ -931,7 +956,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGH-Tg-cN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1307" y="1964"/>
+            <point key="canvasLocation" x="1407" y="1964"/>
         </scene>
         <!--Item-->
         <scene sceneID="YUA-mT-Zip">
@@ -1048,7 +1073,6 @@
                         <segue destination="upf-kf-oZI" kind="relationship" relationship="viewControllers" id="h57-GO-3zO"/>
                         <segue destination="qe2-TY-seq" kind="relationship" relationship="viewControllers" id="lG1-WX-Klf"/>
                         <segue destination="gMz-Ie-3ue" kind="relationship" relationship="viewControllers" id="IhT-B3-Znd"/>
-                        <segue destination="Y5B-2x-Q0w" kind="relationship" relationship="viewControllers" id="pOl-TP-G1G"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BTq-as-MAI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1159,8 +1183,7 @@
         <image name="search_@1x-1" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lG1-WX-Klf"/>
-        <segue reference="pOl-TP-G1G"/>
         <segue reference="IhT-B3-Znd"/>
+        <segue reference="lG1-WX-Klf"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *arr_Result;
 @property (nonatomic, strong) NSMutableArray *arr_ImgURL;
 @property (nonatomic, strong) NSMutableDictionary *dic_Image;
+@property (weak, nonatomic) IBOutlet UIView *emptyView;
 @end
 
 @implementation FavoriteVC
@@ -71,7 +72,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerNib:[UINib nibWithNibName:@"ListCell" bundle:nil] forCellReuseIdentifier:@"ListCell"];
-    [self.tableView setSeparatorColor:[UIColor blackColor]];
+    [self.tableView setSeparatorColor:[UIColor whiteColor]];
     _tableView.estimatedRowHeight = 270.f;
     _tableView.rowHeight = UITableViewAutomaticDimension;
 }
@@ -84,7 +85,15 @@
     _arr_ImgURL = [NSMutableArray new];
     
     _arr_Favorite = [CoreDataManager getAllResult];
-    for (int j = 0; j < _arr_Favorite.count; j++)
+    if (_arr_Favorite.count > 0)
+    {
+        [self showEmptyView:NO];
+    }
+    else
+    {
+        [self showEmptyView:YES];
+    }
+    for (int j = (int)_arr_Favorite.count -1; j >= 0; j--)
     {
         Animal *animal = [_arr_Favorite objectAtIndex:j];
         //取到core data的 參數
@@ -107,6 +116,21 @@
     
     [self.tableView reloadData];
 }
+-(void)showEmptyView:(BOOL)bShowEmptyView
+{
+    if (bShowEmptyView)
+    {
+        _emptyView.hidden = NO;
+        _tableView.hidden = YES;
+    }
+    else
+    {
+        _emptyView.hidden = YES;
+        _tableView.hidden = NO;
+    }
+}
+
+
 
 #pragma mark 下載照片
 - (void)downloadImage:(NSString *)str_ImgURL
@@ -155,7 +179,7 @@
 #pragma mark TableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _arr_Favorite.count;
+    return _arr_Result.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -302,9 +326,15 @@
 {
     DataModel *m = [_arr_Result objectAtIndex:((UIButton *)sender).tag];
     [CoreDataManager saveOrDelete:m];
-    NSIndexPath *index = [NSIndexPath indexPathForRow:((UIButton *)sender).tag inSection:0];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
-    });
+    [_arr_Result removeObjectAtIndex:((UIButton *)sender).tag];
+    if (_arr_Result.count > 0)
+    {
+        [self.tableView reloadData];
+    }
+    else
+    {
+        [self showEmptyView:YES];
+    }
+    
 }
 @end

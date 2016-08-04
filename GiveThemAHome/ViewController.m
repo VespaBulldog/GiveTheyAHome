@@ -89,6 +89,7 @@
 {
     [super viewWillAppear:animated];
     [self getFavorite];
+    [self checkFavorite];
     [self.tableView reloadData];
 }
 
@@ -308,6 +309,27 @@
     }
     
     [_tableView reloadData];
+}
+
+//重新再判斷一次Favorite
+-(void)checkFavorite
+{
+    if (_arr_Result.count > 0)
+    {
+        for (int i = 0; i < _arr_Result.count ; i++)
+        {
+            DataModel * m= [_arr_Result objectAtIndex:i];
+            m.is_favorite = NO;
+            for (int j = 0; j < _arr_Favorite.count; j++)
+            {
+                DataModel * d= [_arr_Favorite objectAtIndex:j];
+                if ([m.animal_id isEqualToString:d.animal_id])
+                {
+                    m.is_favorite = YES;
+                }
+            }
+        }
+    }
 }
 
 //載入下一頁
